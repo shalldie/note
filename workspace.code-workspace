@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "vite-vue",
+			"path": "vite-vue"
+		},
+		{
+			"name": "note",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
