@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"name": "nodets",
+			"path": "nodets"
+		},
+		{
 			"name": "goapp",
 			"path": "goapp"
 		},
@@ -11,9 +15,6 @@
 		{
 			"name": "note",
 			"path": "."
-		},
-		{
-			"path": "nodets"
 		}
 	],
 	"settings": {}

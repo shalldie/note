@@ -5,22 +5,58 @@ import (
 	"net/http"
 )
 
-// import "fmt"
+// import (
+// 	"io/ioutil"
+// 	"net/http"
+// )
 
-// func If(condition bool,trueResult,falseResult)  {
-// 	if condition{
-// 		return trueResult
-// 	}
+// // import "fmt"
 
-// 	return falseResult
+// // func If(condition bool,trueResult,falseResult)  {
+// // 	if condition{
+// // 		return trueResult
+// // 	}
+
+// // 	return falseResult
+// // }
+
+// // func balabala(condition bool,tr,fr)  {
+// // 	if condition{
+// // 		return tr
+// // 	}
+
+// // 	return fr
+// // }
+
+// type Person struct {
+// 	name string `default:"default-a"`
+
+// 	age int
 // }
 
-// func balabala(condition bool,tr,fr)  {
-// 	if condition{
-// 		return tr
+// func main() {
+
+// 	person := new(Person)
+
+// 	println(person.name, person.age)
+
+// 	response, err := http.Get("https://nosaid.com")
+
+// 	if err != nil {
+// 		println(err)
+// 		return
 // 	}
 
-// 	return fr
+// 	defer response.Body.Close()
+
+// 	result, err := ioutil.ReadAll(response.Body)
+
+// 	if err != nil {
+// 		return
+// 	}
+
+// 	println(string(result))
+
 // }
 
 func main() {
@@ -29,7 +65,6 @@ func main() {
 
 	if err != nil {
 		println(err)
-		return
 	}
 
 	defer response.Body.Close()
@@ -37,9 +72,8 @@ func main() {
 	result, err := ioutil.ReadAll(response.Body)
 
 	if err != nil {
-		return
+		println(err)
 	}
 
 	println(string(result))
-
 }
