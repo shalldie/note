@@ -1,10 +1,10 @@
 package main
 
 type Person struct {
-	name string
-	age  int
+	Name string `json:"name"`
+	Age  int    `json:"age"`
 }
 
 func (p Person) sayHello() {
-	println(p.name, p.age)
+	println(p.Name, p.Age)
 }

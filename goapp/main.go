@@ -1,13 +1,22 @@
 package main
 
+// import (
+// 	"github.com/gin-gonic/gin"
+// )
+
 func main() {
-	// person := Person{
-	// 	name: "tom",
-	// 	age:  12,
-	// }
 
-	// person.sayHello()
+	// r := gin.Default()
+	// r.GET("/", func(c *gin.Context) {
+	// 	c.JSON(200, gin.H{
+	// 		"name": "tom",
+	// 		"age":  12,
+	// 		"child": gin.H{
+	// 			"name": "lily",
+	// 			"age":  233,
+	// 		},
+	// 	})
+	// })
 
-	Chart{}.Print()
-
+	// r.Run("0.0.0.0:8080")
 }

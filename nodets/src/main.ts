@@ -22,3 +22,9 @@ console.log('hello');
 console.log('hello');
 
 console.log('hello world');
+
+type ReturnTypeX<T> = T extends (...args: any[]) => infer R ? R : T;
+
+function demo(): [number, string] {}
+
+type tt = ReturnTypeX<typeof demo>;
