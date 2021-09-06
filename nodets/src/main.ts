@@ -16,3 +16,9 @@
 // let x2 = 20;
 
 // function getDuration(length: number) {}
+
+console.log('hello');
+
+console.log('hello');
+
+console.log('hello world');
