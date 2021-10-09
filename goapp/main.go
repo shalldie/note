@@ -1,22 +1,18 @@
 package main
 
-// import (
-// 	"github.com/gin-gonic/gin"
-// )
+import (
+	"goapp/routers"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
+	app := gin.Default()
 
-	// r := gin.Default()
-	// r.GET("/", func(c *gin.Context) {
-	// 	c.JSON(200, gin.H{
-	// 		"name": "tom",
-	// 		"age":  12,
-	// 		"child": gin.H{
-	// 			"name": "lily",
-	// 			"age":  233,
-	// 		},
-	// 	})
-	// })
+	routers.Setup(app)
 
-	// r.Run("0.0.0.0:8080")
+	app.Run(":8081")
+
+	http.Get("https://www.baidu.com")
 }

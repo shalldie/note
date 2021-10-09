@@ -17,14 +17,42 @@
 
 // function getDuration(length: number) {}
 
-console.log('hello');
+// console.log('hello');
 
-console.log('hello');
+// console.log('hello');
 
-console.log('hello world');
+// console.log('hello world');
 
-type ReturnTypeX<T> = T extends (...args: any[]) => infer R ? R : T;
+// type ReturnTypeX<T> = T extends (...args: any[]) => infer R ? R : T;
 
-function demo(): [number, string] {}
+// function demo(): [number, string] {}
 
-type tt = ReturnTypeX<typeof demo>;
+// type tt = ReturnTypeX<typeof demo>;
+
+class SomeClass {
+    someMethod(): string {
+        return 'hello world';
+    }
+}
+
+// type TSomeType = {
+//     [key in typeof ]: string;
+// };
+
+type Tpromisify<T> = T extends (...arg: infer R) => void ? Promise<R> : Promise<void>;
+
+function Action1(s: string, age: number) {}
+
+type tt = Tpromisify<typeof Action1>;
+
+function promisify<T extends (...args: any[]) => void>(
+    useAction: T
+): T extends (...arg: infer R) => void ? Promise<R> : Promise<void> {
+    return new Promise<any>(resolve => {
+        useAction((...args: any[]) => {
+            resolve(args);
+        });
+    });
+}
+
+function main() {}
