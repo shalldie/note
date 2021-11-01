@@ -29,30 +29,52 @@
 
 // type tt = ReturnTypeX<typeof demo>;
 
-class SomeClass {
-    someMethod(): string {
-        return 'hello world';
-    }
+// class SomeClass {
+//     someMethod(): string {
+//         return 'hello world';
+//     }
+// }
+
+// type Tpromisify<T> = T extends (...arg: infer R) => void ? Promise<R> : Promise<void>;
+
+// function Action1(s: string, age: number) {}
+
+// type tt = Tpromisify<typeof Action1>;
+
+// function promisify<T extends (...args: any[]) => void>(
+//     useAction: T
+// ): T extends (...arg: infer R) => void ? Promise<R> : Promise<void> {
+//     return new Promise<any>(resolve => {
+//         useAction((...args: any[]) => {
+//             resolve(args);
+//         });
+//     });
+// }
+
+// function main() {}
+
+function test(content: string) {
+    // console.log(/^((\S)(\2){2})*$/.test(content) && !/(\S)\S{2,}\1/.test(content));
+    // const reg = /^(?=(\S)\S{2,}\1)((\S)(\2){2})*$/;
+    const reg = /^(?!.*(\S)\S{2,}\1)((\S)(\3){2})*$/;
+    console.log(reg.test(content));
 }
 
-// type TSomeType = {
-//     [key in typeof ]: string;
-// };
+test('111222333');
+test('11122333');
+test('111222111');
 
-type Tpromisify<T> = T extends (...arg: infer R) => void ? Promise<R> : Promise<void>;
+const arr = [1, 2, 3] as const;
 
-function Action1(s: string, age: number) {}
+type TItem = typeof arr[number];
 
-type tt = Tpromisify<typeof Action1>;
-
-function promisify<T extends (...args: any[]) => void>(
-    useAction: T
-): T extends (...arg: infer R) => void ? Promise<R> : Promise<void> {
-    return new Promise<any>(resolve => {
-        useAction((...args: any[]) => {
-            resolve(args);
-        });
-    });
+interface ISomeType {
+    name: string;
+    otherField: string;
 }
 
-function main() {}
+type TBala = Partial<ISomeType> & Pick<ISomeType, 'name'>;
+
+var item:TBala = {
+    
+}

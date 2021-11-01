@@ -1,12 +1,12 @@
 {
 	"folders": [
 		{
-			"name": "goapp",
-			"path": "goapp"
-		},
-		{
 			"name": "nodets",
 			"path": "nodets"
+		},
+		{
+			"name": "goapp",
+			"path": "goapp"
 		},
 		{
 			"name": "vite-vue",

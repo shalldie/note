@@ -1,4 +1,4 @@
-package routers
+package home
 
 import (
 	"goapp/models"
@@ -6,8 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func loadHome(app *gin.Engine) {
-
+func loadRoute(app *gin.Engine) {
 	route := app.Group("/")
 	{
 
@@ -18,5 +17,4 @@ func loadHome(app *gin.Engine) {
 			})
 		})
 	}
-
 }

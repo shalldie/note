@@ -1,20 +1,20 @@
-package routers
+package article
 
 import (
-	"goapp/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func loadArticle(app *gin.Engine) {
+func loadRoute(app *gin.Engine) {
 
 	route := app.Group("/article")
 	{
 		route.Any("/:name", func(c *gin.Context) {
 
-			person := models.Person{}
-			err := c.BindJSON(&person)
+			// article := Article{}
+			var article Article
+			err := c.BindJSON(&article)
 
 			if err != nil {
 				return
@@ -22,7 +22,7 @@ func loadArticle(app *gin.Engine) {
 
 			c.JSON(200, gin.H{
 				"messsage": "objk",
-				"person":   person,
+				"article":  article,
 			})
 		})
 
