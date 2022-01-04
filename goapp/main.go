@@ -4,24 +4,22 @@ import (
 	"fmt"
 	"goapp/modules"
 	"goapp/utils"
-	"os"
 	"regexp"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	PORT, hasPort := os.LookupEnv("PORT")
-	if !hasPort {
-		PORT = "8081"
-	}
-	utils.Open(fmt.Sprintf("http://127.0.0.1:%s", PORT))
+
+	config := utils.ParseEnv()
+
+	utils.Open(fmt.Sprintf("http://127.0.0.1:%s", config.PORT))
 
 	app := gin.Default()
 
 	modules.Setup(app)
 
-	app.Run(":" + PORT)
+	app.Run(":" + config.PORT)
 }
 
 func main2() {
