@@ -53,28 +53,43 @@
 
 // function main() {}
 
-function test(content: string) {
-    // console.log(/^((\S)(\2){2})*$/.test(content) && !/(\S)\S{2,}\1/.test(content));
-    // const reg = /^(?=(\S)\S{2,}\1)((\S)(\2){2})*$/;
-    const reg = /^(?!.*(\S)\S{2,}\1)((\S)(\3){2})*$/;
-    console.log(reg.test(content));
-}
+// function test(content: string) {
+//     // console.log(/^((\S)(\2){2})*$/.test(content) && !/(\S)\S{2,}\1/.test(content));
+//     // const reg = /^(?=(\S)\S{2,}\1)((\S)(\2){2})*$/;
+//     const reg = /^(?!.*(\S)\S{2,}\1)((\S)(\3){2})*$/;
+//     console.log(reg.test(content));
+// }
 
-test('111222333');
-test('11122333');
-test('111222111');
+// test('111222333');
+// test('11122333');
+// test('111222111');
 
-const arr = [1, 2, 3] as const;
+// const arr = [1, 2, 3] as const;
 
-type TItem = typeof arr[number];
+// type TItem = typeof arr[number];
 
-interface ISomeType {
-    name: string;
-    otherField: string;
-}
+// interface ISomeType {
+//     name: string;
+//     otherField: string;
+// }
 
-type TBala = Partial<ISomeType> & Pick<ISomeType, 'name'>;
+// type TBala = Partial<ISomeType> & Pick<ISomeType, 'name'>;
 
-var item:TBala = {
-    
-}
+// var item:TBala = {
+
+// }
+
+// import https from 'https';
+
+// https.get('https://nosaid.com', res => {
+//     const bytes: number[] = [];
+//     res.on('data', chunk => {
+//         bytes.push(...chunk);
+//     });
+//     res.on('end', () => {
+//         const result = Buffer.from(bytes).toString();
+//         console.log(result);
+//     });
+// });
+
+import './mg';

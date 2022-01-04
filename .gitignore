@@ -79,3 +79,5 @@ goapp/main
 goapp/vendor
 
 .DS_Store
+
+dist
