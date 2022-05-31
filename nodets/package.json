@@ -4,19 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run build && node dist/main.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/glob": "^7.2.0",
     "@types/node": "^16.7.8",
     "prettier": "^2.3.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "glob": "^8.0.1",
+    "injection-js": "^2.4.0",
+    "iocoo": "0.0.3",
     "mongodb": "^3.7.3",
+    "reflect-metadata": "^0.1.13",
+    "table": "^6.8.0",
     "typeorm": "^0.2.41"
   }
 }

@@ -92,4 +92,17 @@
 //     });
 // });
 
-import './mg';
+// process.on('uncaughtException', err => {
+//     console.log('--------');
+//     console.log(err);
+//     console.log('--------');
+// });
+
+// import './mg';
+// import './table';
+// import './reflect';
+// import fs from 'fs';
+// import path from 'path';
+// import glob from 'glob';
+
+console.log('hello world');
