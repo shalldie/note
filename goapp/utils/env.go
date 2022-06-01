@@ -6,7 +6,7 @@ import (
 )
 
 type EnvConfig struct {
-	PORT string `env:"PORT" envDefault:""`
+	PORT string `env:"PORT" envDefault:"8082"`
 }
 
 func ParseEnv() *EnvConfig {
