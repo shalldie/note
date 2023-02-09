@@ -1,32 +1,45 @@
-import '@/styles/globals.css';
+// import '@/styles/globals.css';
+import '~/assets/styles/main.scss';
 import type {AppContext, AppProps, AppType} from 'next/app';
 import {Navbar} from '~/components/Navbar';
 import {Provider} from 'react-redux';
-import {store} from '~/store';
+import {wrapper} from '~/store';
 import {NextPage} from 'next';
-import {appActions} from '~/store/app';
+import {commonActions} from '~/store/common';
+import App from 'next/app';
+import {ELayoutTemplte} from '~/components/layouts';
+import PageError from './_error';
 
-const App: AppType = ({Component, pageProps}) => {
+const MyApp: AppType = ({Component, ...rest}) => {
+    const {store, props} = wrapper.useWrappedStore(rest);
+
+    if (props.pageProps.error) {
+        return <PageError {...props.pageProps.error} />;
+    }
+
     return (
         <Provider store={store}>
             <Navbar />
-            <Component {...pageProps} />
+            <Component {...props.pageProps} />
         </Provider>
     );
 };
 
-// export default function App({Component, pageProps}: AppProps) {
-//     return (
-//         <Provider store={store}>
-//             <Navbar />
-//             <Component {...pageProps} />
-//         </Provider>
-//     );
-// }
+MyApp['layout'] = ELayoutTemplte.default;
 
-App.getInitialProps = async ctx => {
-    await store.dispatch(appActions.initialize());
-    return {};
-};
+MyApp.getInitialProps = wrapper.getInitialAppProps(store => async appCtx => {
+    console.log('invoke getInitialAppProps');
+    // You have to do dispatches first, before...
+    await store.dispatch(commonActions.initialize());
 
-export default App;
+    // ...before calling (and awaiting!!!!) the children's getInitialProps
+    const childrenGip = await App.getInitialProps(appCtx);
+
+    return {
+        pageProps: {
+            ...childrenGip.pageProps
+        }
+    };
+});
+
+export default MyApp;

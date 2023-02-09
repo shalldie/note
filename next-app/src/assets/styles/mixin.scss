@@ -1,0 +1,84 @@
+@mixin flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@mixin flex-column {
+    @include flex;
+    flex-direction: column;
+}
+
+@mixin flex-item($num: 1) {
+    flex: $num;
+}
+
+@mixin before-middle {
+    &::before {
+        content: '';
+        height: 100%;
+        @include inline-middle;
+    }
+}
+
+@mixin inline-middle {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@mixin pc-layout {
+    @media (min-width: $MEDIA_WIDTH) {
+        @content;
+    }
+}
+
+@mixin mobile-layout {
+    @media (max-width: $MEDIA_WIDTH) {
+        @content;
+    }
+}
+
+@mixin text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin run-border($color: $COLOR) {
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        transition: 0.3s;
+        background-color: $color;
+    }
+    &::before {
+        left: 0;
+        top: 0;
+    }
+
+    &::after {
+        right: 0;
+        bottom: 0;
+    }
+
+    &:hover {
+        &::before,
+        &::after {
+            width: 100%;
+        }
+    }
+}
+
+@mixin shadow($color: rgba(0, 0, 0, 0.2)) {
+    box-shadow: 3px 3px 6px $color;
+}
+
+@mixin hover-shadow($color: rgba(0, 0, 0, 0.2)) {
+    transition: $TRANSITION;
+    &:hover {
+        @include shadow($color);
+    }
+}

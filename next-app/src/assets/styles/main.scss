@@ -1,0 +1,125 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+// 滚动条
+// ::-webkit-scrollbar {
+//     width: 12px;
+//     background-color: #fff;
+// }
+
+// ::-webkit-scrollbar-track {
+//     border-right-width: 1px;
+//     border-left-width: 1px;
+//     border-right-style: solid;
+//     border-left-style: solid;
+//     border-right-color: #ccc;
+//     border-left-color: #ccc;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background-color: #bfbfbf;
+//     border: 1px solid #8f8f8f;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//     background-color: #737373;
+//     border: 1px solid #7d7d7d;
+// }
+
+// ::-webkit-scrollbar-thumb:active {
+//     background-color: #616161;
+//     border: 1px solid #7d7d7d;
+// }
+
+.clearfix::after,
+.container::after {
+    clear: both;
+    display: table;
+    content: ' ';
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro SC', 'SF Pro Text', 'Helvetica Neue', Helvetica,
+        'PingFang SC', 'Segoe UI', Roboto, 'Hiragino Sans GB', 'Arial', 'microsoft yahei ui', 'Microsoft YaHei', SimSun,
+        sans-serif;
+    // font-family: -apple-system, BlinkMacSystemFont, STHeiti, 'Helvetica Neue', Helvetica, Arial, 'PingFang SC',
+    //     'Microsoft Yahei', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.428571429;
+    color: $COLOR;
+    background: #fff;
+    position: relative;
+}
+
+// container
+.container {
+    position: relative;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 96%;
+    }
+}
+
+// @media (min-width: 768px) {
+//     .container {
+//         width: $MEDIA_WIDTH;
+//     }
+// }
+
+// @media (min-width: 992px) {
+//     .container {
+//         width: 970px;
+//     }
+// }
+
+// @media (min-width: 1200px) {
+//     .container {
+//         width: 1170px;
+//     }
+// }
+
+@media (min-width: 1400px) {
+    .container {
+        width: 1300px;
+    }
+}
+
+.row {
+    display: flex;
+}
+
+@for $i from 1 through 24 {
+    .col-#{$i} {
+        flex: 0 0 calc($i/24) * 100%;
+        max-width: calc($i/24) * 100%;
+    }
+    .col-offset-#{$i} {
+        margin-left: calc($i/24) * 100%;
+    }
+}
+
+@media (max-width: $MEDIA_WIDTH) {
+    @for $i from 1 through 24 {
+        .col-m-#{$i} {
+            flex: 0 0 calc($i/24) * 100%;
+            max-width: calc($i/24) * 100%;
+        }
+    }
+
+    .col-m-hidden {
+        display: none;
+    }
+}

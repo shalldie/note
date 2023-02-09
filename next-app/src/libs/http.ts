@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosError} from 'axios';
 import {URL} from 'url';
 import {isServer} from './utils';
 
@@ -10,8 +10,17 @@ instance.interceptors.response.use(
     response => {
         return response;
     },
-    error => {
-        return Promise.reject(error);
+    (error: AxiosError) => {
+        // console.log(error);
+
+        const errData: Partial<IHttpError> = (error.response?.data as any) || {};
+
+        const httpErr: IHttpError = {
+            statusCode: errData.statusCode || error.code || 500,
+            message: errData.message || error.message || '服务器内部错误'
+        };
+
+        return Promise.reject(JSON.stringify(httpErr));
     }
 );
 
@@ -23,9 +32,7 @@ export const http = {
         return data;
     },
     async post<T>(method: string, payload = {}) {
-        const {data} = await instance.post<T>(method, {
-            data: payload
-        });
+        const {data} = await instance.post<T>(method, payload);
         return data;
     }
 };

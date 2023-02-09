@@ -1,6 +1,7 @@
 import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 import {useAppSelector} from '~/store';
+// import {useAppSelector} from '~/store';
 // import Image from 'next/image';
 // import {Inter} from '@next/font/google';
 // import styles from '@/styles/Home.module.css';
@@ -12,8 +13,12 @@ interface IProps {
 }
 
 export default function Home(props: IProps) {
-    const storeTime = useAppSelector(n => n.app.time);
-    console.log(storeTime);
+    const storeTime = useAppSelector(n => n.common.time);
+
+    const list = useAppSelector(n => n.article.list);
+
+    // const storeTime = 233;
+    // console.log(storeTime);
     return (
         <>
             <Head>
@@ -24,15 +29,16 @@ export default function Home(props: IProps) {
             </Head>
             <main>
                 <div>This is Page Index - {storeTime}</div>
-                <div>{props.time}</div>
+                {/* <div>{props.time}</div> */}
+                <pre>{JSON.stringify(list, null, '    ')}</pre>
             </main>
         </>
     );
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async ctx => {
-    const time = new Date().toLocaleString();
-    return {
-        props: {time}
-    };
-};
+// export const getServerSideProps: GetServerSideProps<IProps> = async ctx => {
+//     const time = new Date().toLocaleString();
+//     return {
+//         props: {time}
+//     };
+// };
