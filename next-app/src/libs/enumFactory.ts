@@ -123,7 +123,7 @@ export class Enumx<T extends IEnumxItemOptions> {
      */
     getLabelById(id: any): string {
         const item = this.getItemById(id);
-        return item ? item.label : '';
+        return item?.label || '';
     }
 }
 

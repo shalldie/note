@@ -1,16 +1,15 @@
-export * from './common';
 export * from './article';
 
 import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 import {createWrapper, HYDRATE} from 'next-redux-wrapper';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {commonSlice} from './common';
 import {articleSlice} from './article';
+import {globalSlice} from './global';
 
 const makeStore = () =>
     configureStore({
         reducer: {
-            [commonSlice.name]: commonSlice.reducer,
+            [globalSlice.name]: globalSlice.reducer,
             [articleSlice.name]: articleSlice.reducer
         },
         devTools: true

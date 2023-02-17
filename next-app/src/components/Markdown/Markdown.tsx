@@ -11,7 +11,9 @@ export interface IMarkdownProps {
     content: string;
 }
 
-export const Markdown: React.FC<{content: string}> = props => {
+// const ReactMarkdownClient = dynamic(() => import('react-markdown').then(n => n.default));
+
+const Markdown: React.FC<{content: string}> = props => {
     const cls = cn('markdown', 'markdown-body', styles.markdown);
 
     return (
@@ -20,3 +22,5 @@ export const Markdown: React.FC<{content: string}> = props => {
         </ReactMarkdown>
     );
 };
+
+export default Markdown;

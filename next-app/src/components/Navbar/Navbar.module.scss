@@ -1,0 +1,136 @@
+.navbar {
+}
+
+$PC_BAR_Height: 60px;
+$topColor: #fff;
+
+// PC
+.pc-bar {
+    // z-index: 999;
+    position: relative;
+    // transition: $TRANSITION;
+    height: $PC_BAR_Height;
+    background-color: $COLOR;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+    :global {
+        .container {
+            @include flex;
+            // padding-left: 15px;
+        }
+
+        .brand {
+            @include flex;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.45);
+            height: $PC_BAR_Height;
+            padding: 0 20px;
+
+            img {
+                width: 26px;
+                height: 26px;
+            }
+            span {
+                margin-left: 10px;
+                text-shadow: 1px 1px 3px $COLOR;
+            }
+        }
+        .menu-bar {
+            margin-left: auto;
+        }
+    }
+}
+
+.menu-item {
+    position: relative;
+    display: inline-block;
+    height: $PC_BAR_Height;
+    line-height: $PC_BAR_Height;
+    cursor: pointer;
+    color: $topColor;
+    text-decoration: none;
+    transition: 0.2s;
+
+    :global {
+        .menu-item-text {
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            padding: 0 30px;
+            height: 100%;
+            color: $topColor;
+            @include flex;
+
+            > span {
+                margin-left: 5px;
+                font-weight: bold;
+            }
+            .list-menu {
+                display: none;
+            }
+        }
+    }
+
+    &:hover {
+        background-color: #262c35;
+
+        ul {
+            display: block;
+        }
+    }
+}
+
+.list-menu {
+    position: absolute;
+    display: none;
+    border-radius: $BORDER_RADIUS;
+    border-top-right-radius: 0;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    // border-radius: $BORDER_RADIUS;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    > li {
+        padding: 0;
+        margin: 0;
+
+        a {
+            display: block;
+            color: $COLOR;
+            text-decoration: none;
+            // height: 20px;
+            line-height: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+
+            &:hover {
+                color: #fff;
+                background-color: #d9534f;
+                margin: 0 -1px;
+                padding: 10px 21px;
+            }
+
+            i {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.mobile-bar {
+}

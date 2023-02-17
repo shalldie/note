@@ -1,7 +1,8 @@
-import {GetServerSideProps, NextPage} from 'next';
-import {articleActions, commonActions, useAppDispatch, useAppSelector, wrapper} from '~/store';
+import {NextPage} from 'next';
+import {articleActions, useAppSelector, wrapper} from '~/store';
 import {Markdown} from '~/components/Markdown';
 import {handlePageDispatchProps} from '~/libs/utils';
+import {LayoutColumn} from '~/components/layouts';
 
 // interface IProps {
 //     time: string;
@@ -9,15 +10,9 @@ import {handlePageDispatchProps} from '~/libs/utils';
 
 const ArticleDetail: NextPage = () => {
     const detail = useAppSelector(n => n.article.detail!);
-    // const detail: any = {};
-
-    // if (!detail) {
-    //     return null;
-    // }
 
     return (
-        <main className="page-about">
-            <h2>{detail?.title}</h2>
+        <main className="page-article-detail">
             <Markdown content={detail.content} />
             {/* <pre>{JSON.stringify(detail?.content, null, '    ')}</pre> */}
         </main>
@@ -28,6 +23,8 @@ ArticleDetail.getInitialProps = wrapper.getInitialPageProps(store => async ctx =
     const result = await store.dispatch(articleActions.fetchDetail(ctx.query.name as string));
     return handlePageDispatchProps(result, ctx);
 });
+
+ArticleDetail['layout'] = LayoutColumn;
 
 // export const getServerSideProps = wrapper.getServerSideProps(store => async ctx => {
 //     // store.dispatch(articleActions.)
