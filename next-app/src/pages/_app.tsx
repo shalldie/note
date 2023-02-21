@@ -62,7 +62,7 @@ const BlogApp: AppType = ({Component, ...rest}) => {
 BlogApp.getInitialProps = wrapper.getInitialAppProps(store => async appCtx => {
     // console.log('invoke getInitialAppProps');
     // You have to do dispatches first, before...
-    await store.dispatch(globalActions.initialize());
+    await store.dispatch(globalActions.serverInit());
 
     // ...before calling (and awaiting!!!!) the children's getInitialProps
     const childrenGip = await App.getInitialProps(appCtx);

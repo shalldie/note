@@ -2,14 +2,13 @@
  * 全局相关
  */
 
-import {http} from '~/libs/http';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {articleActions} from './article';
-import {makeExtraReducers} from './utils';
+import {appendExtraHYDRATE} from './utils';
 import {TRootState} from '.';
 
 export class GlobalState {
-    initialized = false;
+    serverInitialized = false;
 
     avatar = `${process.env.CDN_PREFIX}images/public/avatar_gh.png`;
 
@@ -104,20 +103,20 @@ export const globalSlice = createSlice({
             Object.assign(state, action.payload);
         }
     },
-    extraReducers: {
-        ...makeExtraReducers('global')
+    extraReducers(builder) {
+        appendExtraHYDRATE(builder, 'global');
     }
 });
 
 export const globalActions = {
-    initialize: createAsyncThunk('global/initialize', async (_: undefined, thunk) => {
-        const initialized = (thunk.getState() as TRootState).global.initialized;
+    ...globalSlice.actions,
+    serverInit: createAsyncThunk('global/serverInit', async (_: undefined, thunk) => {
+        const initialized = (thunk.getState() as TRootState).global.serverInitialized;
         if (initialized) {
             return;
         }
-        thunk.dispatch(globalActions.assignState({initialized: true}));
+        thunk.dispatch(globalActions.assignState({serverInitialized: true}));
 
         await thunk.dispatch(articleActions.fetchList());
-    }),
-    ...globalSlice.actions
+    })
 };

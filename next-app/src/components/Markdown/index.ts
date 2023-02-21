@@ -1,8 +1,11 @@
 import dynamic from 'next/dynamic';
+import React from 'react';
 
-export const Markdown = dynamic(() =>
-    import(
-        /* webpackChunkName: "markdown" */
-        './Markdown'
-    ).then(n => n.default)
-);
+export * from './Markdown';
+
+// export const Markdown = dynamic(() =>
+//     import(
+//         /* webpackChunkName: "markdown" */
+//         './Markdown'
+//     ).then(n => n.default)
+// );

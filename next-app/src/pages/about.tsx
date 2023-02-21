@@ -5,6 +5,8 @@ import {LayoutColumn} from '~/components/layouts';
 
 const PageAbout: NextPage = () => {
     const {avatar, description} = useAppSelector(n => n.global);
+    // const avatar = '';
+    // const description = [];
     // const description = useAppSelector
 
     return (

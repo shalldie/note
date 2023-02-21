@@ -11,8 +11,6 @@ instance.interceptors.response.use(
         return response;
     },
     (error: AxiosError) => {
-        // console.log(error);
-
         const errData: Partial<IHttpError> = (error.response?.data as any) || {};
 
         const httpErr: IHttpError = {

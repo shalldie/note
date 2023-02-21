@@ -1,4 +1,5 @@
 import {KB} from '~/components/KB';
+import {LayoutColumn} from '~/components/layouts';
 import {useAppSelector} from '~/store';
 // import {useAppSelector} from '~/store';
 // import Image from 'next/image';
@@ -25,6 +26,8 @@ export default function Home(props: IProps) {
         </KB>
     );
 }
+
+Home['layout'] = LayoutColumn;
 
 // export const getServerSideProps: GetServerSideProps<IProps> = async ctx => {
 //     const time = new Date().toLocaleString();
