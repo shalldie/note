@@ -6,6 +6,7 @@ import {When} from 'react-if';
 import styles from './Navbar.module.scss';
 import {DynamicComponent} from '../DynamicComponent';
 import {sleep} from '~/libs/utils';
+import {useKBar} from 'kbar';
 
 const useMenu = () => {
     const [visible, setVisible] = useState(true);
@@ -25,6 +26,7 @@ const useMenu = () => {
 export const PCBar: React.FC = () => {
     const bar = useAppSelector(n => n.global.navbar);
     const menu = useMenu();
+    const {query} = useKBar();
 
     return (
         <div className={styles['pc-bar']}>
@@ -33,6 +35,7 @@ export const PCBar: React.FC = () => {
                     <img src="/favicon.png" alt={bar.brand.text} />
                     <span>{bar.brand.text}</span>
                 </Link>
+                <button onClick={query.toggle}>kbar</button>
                 <div className="menu-bar">
                     {bar.menus.map((mItem, index) => (
                         <div className={styles['menu-item']} key={index}>
@@ -43,14 +46,14 @@ export const PCBar: React.FC = () => {
                                 key={index}
                             >
                                 {mItem.icon && <i className={mItem.icon}></i>}
-                                <span>{mItem.text}</span>
+                                <span>{mItem.title}</span>
                                 <When condition={mItem.children?.length && menu.visible}>
                                     <ul className={styles['list-menu']}>
                                         {mItem.children?.map((item, index) => (
                                             <li key={index} onClick={menu.hide}>
                                                 <Link href={item.link!}>
                                                     {item.icon && <i className={item.icon}></i>}
-                                                    <span>{item.text}</span>
+                                                    <span>{item.title}</span>
                                                 </Link>
                                             </li>
                                         ))}

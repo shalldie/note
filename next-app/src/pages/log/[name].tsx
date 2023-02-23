@@ -3,8 +3,10 @@ import {Markdown} from '~/components/Markdown';
 import {http} from '~/libs/http';
 import Head from 'next/head';
 import {LayoutColumn} from '~/components/layouts';
+import {wrapper} from '~/store';
 
-const PageLog: NextPage<{markdown: string}> = ({markdown}) => {
+const PageLog: NextPage<{markdown: string}> = ({markdown, ...props}) => {
+    wrapper.useHydration(props);
     return (
         <>
             <Head>

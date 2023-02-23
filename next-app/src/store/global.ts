@@ -4,7 +4,6 @@
 
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {articleActions} from './article';
-import {appendExtraHYDRATE} from './utils';
 import {TRootState} from '.';
 
 export class GlobalState {
@@ -24,41 +23,48 @@ export class GlobalState {
         },
         menus: [
             {
-                text: '封面',
+                title: '封面',
+                // subTitle: '这是一个封面',
                 link: '/',
-                icon: 'fa fa-terminal'
+                icon: 'fa-solid fa-terminal',
+                shortcut: ['g', 'h']
             },
             {
-                text: '文章',
+                title: '文章',
+                subTitle: '闲暇时候的文章',
                 link: '/article',
-                icon: ''
+                icon: 'fa-solid fa-feather',
+                shortcut: ['g', 'w']
             },
             {
-                text: '留言板',
+                title: '留言板',
                 link: '/message',
-                icon: 'fa fa-commenting-o'
+                icon: '',
+                shortcut: ['g', 'l']
             },
             {
-                text: '关于',
-                link: '/about'
+                title: '关于',
+                link: '/about',
+                shortcut: ['g', 'y']
             },
             {
-                text: '>_<#@!',
+                title: '>_<#@!',
+                subTitle: '零碎的东西',
                 children: [
                     {
-                        text: '咱の日志',
+                        title: '咱の日志',
                         link: '/log/index',
-                        icon: 'fa fa-magic'
+                        icon: 'fa-solid fa-pencil'
                     },
                     {
-                        text: '接下来要做',
+                        title: '接下来要做',
                         link: '/log/todo',
-                        icon: 'fa fa-tasks'
+                        icon: 'fa-solid fa-list-check'
                     },
                     {
-                        text: '组件',
+                        title: '组件',
                         link: '/log/component',
-                        icon: 'fa fa-gg'
+                        icon: 'fa-solid fa-microchip'
                     }
                 ]
             }
@@ -102,9 +108,6 @@ export const globalSlice = createSlice({
         assignState(state, action: PayloadAction<Partial<GlobalState>>) {
             Object.assign(state, action.payload);
         }
-    },
-    extraReducers(builder) {
-        appendExtraHYDRATE(builder, 'global');
     }
 });
 

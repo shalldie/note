@@ -1,9 +1,10 @@
 import {NextPage} from 'next';
-import {useAppSelector} from '~/store';
+import {useAppSelector, wrapper} from '~/store';
 import Head from 'next/head';
 import {LayoutColumn} from '~/components/layouts';
 
-const PageAbout: NextPage = () => {
+const PageAbout: NextPage = props => {
+    wrapper.useHydration(props);
     const {avatar, description} = useAppSelector(n => n.global);
     // const avatar = '';
     // const description = [];

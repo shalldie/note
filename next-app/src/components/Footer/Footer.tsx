@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
                                     style={{textDecoration: 'none'}}
                                     rel="noreferrer"
                                 >
-                                    <i style={{fontSize: '60px'}} className="fa fa-github"></i>
+                                    <i style={{fontSize: '60px'}} className="fa-brands fa-github"></i>
                                 </a>
                             </li>
                         </ul>

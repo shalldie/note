@@ -1,6 +1,6 @@
-import {KB} from '~/components/KB';
+// import {KB} from '~/components/KB';
 import {LayoutColumn} from '~/components/layouts';
-import {useAppSelector} from '~/store';
+import {useAppSelector, wrapper} from '~/store';
 // import {useAppSelector} from '~/store';
 // import Image from 'next/image';
 // import {Inter} from '@next/font/google';
@@ -8,22 +8,17 @@ import {useAppSelector} from '~/store';
 
 // const inter = Inter({subsets: ['latin']});
 
-interface IProps {
-    time: string;
-}
-
-export default function Home(props: IProps) {
+export default function Home(props: any) {
+    wrapper.useHydration(props);
     const list = useAppSelector(n => n.article.list);
 
     // const storeTime = 233;
     // console.log(storeTime);
     return (
-        <KB>
-            <main>
-                {/* <div>{props.time}</div> */}
-                <pre>{JSON.stringify(list, null, '    ')}</pre>
-            </main>
-        </KB>
+        <main>
+            {/* <div>{props.time}</div> */}
+            <pre>{JSON.stringify(list, null, '    ')}</pre>
+        </main>
     );
 }
 

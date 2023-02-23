@@ -21,9 +21,18 @@ export default function Document() {
                 <meta name="description" content="xieshuang 的博客，闲暇时候的文章" /> */}
                 {/* <title>闲暇时候的文章</title> */}
                 <link rel="icon" type="image/png" href="/favicon.png" />
-                <link
+                {/* <link
                     rel="stylesheet"
                     href="https://fastly.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+                /> */}
+                {/* <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.0/js/fontawesome.min.js"></script>
+                <link
+                    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.0/css/fontawesome.min.css"
+                    rel="stylesheet"
+                /> */}
+                <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.0/css/all.min.css"
                 />
             </Head>
             <body>

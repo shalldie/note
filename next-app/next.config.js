@@ -9,9 +9,10 @@ module.exports = async (phase, {defaultConfig}) => {
         //     appDir: true
         // },
         reactStrictMode: false,
+        env: {
+            CDN_PREFIX: process.env.CDN_PREFIX
+        },
         sassOptions: {
-            // includePaths: [path.join(__dirname, 'src')],
-            // includePaths: ['./src'],
             prependData: [
                 //
                 `$CDN_PREFIX: '${process.env.CDN_PREFIX}';`,

@@ -8,7 +8,8 @@ import {LayoutColumn} from '~/components/layouts';
 //     time: string;
 // }
 
-const ArticleDetail: NextPage = () => {
+const ArticleDetail: NextPage = props => {
+    wrapper.useHydration(props);
     const detail = useAppSelector(n => n.article.detail!);
 
     return (
@@ -20,7 +21,7 @@ const ArticleDetail: NextPage = () => {
 };
 
 ArticleDetail.getInitialProps = wrapper.getInitialPageProps(store => async ctx => {
-    const result = await store.dispatch(articleActions.fetchDetail(ctx.query.name as string));
+    const result = await store.dispatch(articleActions.fetchDetail(ctx.query.name as string) as any);
     return handlePageDispatchProps(result, ctx);
 });
 

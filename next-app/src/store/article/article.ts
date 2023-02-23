@@ -1,6 +1,5 @@
 import {http} from '~/libs/http';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {appendExtraHYDRATE} from '../utils';
 import {IArticleDetail, IArticleListItem} from './article.model';
 
 export class ArticleState {
@@ -16,9 +15,6 @@ export const articleSlice = createSlice({
         assignState(state, action: PayloadAction<Partial<ArticleState>>) {
             Object.assign(state, action.payload);
         }
-    },
-    extraReducers(builder) {
-        appendExtraHYDRATE(builder, 'article');
     }
 });
 

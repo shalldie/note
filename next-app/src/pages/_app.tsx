@@ -1,4 +1,3 @@
-// import '@/styles/globals.css';
 import 'normalize.css';
 import '~/assets/styles/main.scss';
 
@@ -10,10 +9,10 @@ import {LayoutDefault} from '~/components/layouts';
 import PageError from './_error';
 import React from 'react';
 import Head from 'next/head';
-import {KB} from '~/components/KB';
 import NextNProgress from 'nextjs-progressbar';
 import {TooltipPlugin} from '~/components/TooltipPlugin';
 import {globalActions} from '~/store/global';
+import {KProvider} from '~/components/KProvider';
 
 const AppHeadMeta: React.FC = () => {
     return (
@@ -34,11 +33,11 @@ const AppHeadMeta: React.FC = () => {
     );
 };
 
-const BlogApp: AppType = ({Component, ...rest}) => {
-    const {store, props} = wrapper.useWrappedStore(rest);
+const BlogApp: AppType<{error?: any}> = ({Component, pageProps}) => {
+    const store = wrapper.useStore();
 
-    if (props.pageProps.error) {
-        return <PageError {...props.pageProps.error} />;
+    if (pageProps.error) {
+        return <PageError {...pageProps.error} />;
     }
 
     const Layout = Component['layout'] || LayoutDefault;
@@ -49,26 +48,28 @@ const BlogApp: AppType = ({Component, ...rest}) => {
             <NextNProgress />
             <TooltipPlugin />
             <Provider store={store}>
-                {/* <KB> */}
-                <Layout>
-                    <Component {...props.pageProps} />
-                </Layout>
-                {/* </KB> */}
+                <KProvider>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </KProvider>
             </Provider>
         </>
     );
 };
 
-BlogApp.getInitialProps = wrapper.getInitialAppProps(store => async appCtx => {
-    // console.log('invoke getInitialAppProps');
+(BlogApp as any).getInitialProps = wrapper.getInitialAppProps(store => async appCtx => {
     // You have to do dispatches first, before...
-    await store.dispatch(globalActions.serverInit());
+    await store.dispatch(globalActions.serverInit() as any);
 
     // ...before calling (and awaiting!!!!) the children's getInitialProps
+    // @see https://nextjs.org/docs/advanced-features/custom-app#caveats
     const childrenGip = await App.getInitialProps(appCtx);
 
     return {
         pageProps: {
+            // And you have to spread the children's GIP result into pageProps
+            // @see https://nextjs.org/docs/advanced-features/custom-app#caveats
             ...childrenGip.pageProps
         }
     };
