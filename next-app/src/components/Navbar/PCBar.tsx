@@ -7,6 +7,7 @@ import styles from './Navbar.module.scss';
 import {DynamicComponent} from '../DynamicComponent';
 import {sleep} from '~/libs/utils';
 import {useKBar} from 'kbar';
+import {KB} from '../KProvider';
 
 const useMenu = () => {
     const [visible, setVisible] = useState(true);
@@ -35,8 +36,9 @@ export const PCBar: React.FC = () => {
                     <img src="/favicon.png" alt={bar.brand.text} />
                     <span>{bar.brand.text}</span>
                 </Link>
-                <button onClick={query.toggle}>kbar</button>
+
                 <div className="menu-bar">
+                    <KB />
                     {bar.menus.map((mItem, index) => (
                         <div className={styles['menu-item']} key={index}>
                             <DynamicComponent

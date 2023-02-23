@@ -1,11 +1,7 @@
 import {Action, createAction, useKBar, useRegisterActions} from 'kbar';
 import {useRouter} from 'next/router';
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {useAppSelector} from '~/store';
-
-function randomId() {
-    return Math.random().toString(36).substring(2, 9);
-}
 
 export const ActionIcon: React.FC<{className?: string}> = props => {
     return <i className={props.className} style={{width: '20px'}}></i>;
@@ -13,7 +9,6 @@ export const ActionIcon: React.FC<{className?: string}> = props => {
 
 export const useNavActions = () => {
     const router = useRouter();
-    const kbar = useKBar();
 
     const menus = useAppSelector(n => n.global.navbar.menus);
     const navActions = useMemo<Action[]>(() => {
@@ -32,59 +27,39 @@ export const useNavActions = () => {
                         }
                     }
                 }
-            };
+            } as Action;
         });
 
         return navActions;
     }, [menus, router]);
 
-    // return navActions;
-
-    const searchActions: Action[] = [
-        {
-            id: 'search',
-            name: '全站搜索...',
-            // subtitle: '',
-            section: '搜索',
-            shortcut: ['?'],
-            icon: <ActionIcon className="fa-solid fa-magnifying-glass" />
-            // perform(currentActionImpl) {
-            //     console.log(currentActionImpl.command?.perform);
-            // }
-        }
-    ];
-
-    return navActions.concat(searchActions);
+    return navActions;
 };
 
-const SEARCH_ID = randomId();
+export const useSearchActions = () => {
+    const {queryValue} = useKBar(state => ({queryValue: state.searchQuery}));
 
-// export const useSearchActions = () => {
-//     const {queryValue} = useKBar(state => ({queryValue: state.searchQuery}));
-//     const searchActions = useMemo<Action[]>(() => {
-//         console.log(queryValue);
-//         if (!queryValue.length) {
-//             return [];
-//         }
-//         return [
-//             createAction({
-//                 // id: randomId(),
-//                 name: queryValue + queryValue
-//             })
-//         ];
-//     }, [queryValue]);
-//     const rootSearchAction: Action = {
-//         id: SEARCH_ID,
-//         name: '搜索...',
-//         shortcut: ['?'],
-//         // keywords: 'find',
-//         section: '搜索',
-//         perform(currentActionImpl) {
-//             console.log('invoke ?');
-//         }
-//     };
-//     useRegisterActions([rootSearchAction, ...searchActions].filter(Boolean) as Action[]);
-//     // useEffect(() => {
-//     //     console.log(queryValue);
-//     // }, [queryValue]);
-// };
+    const rootSearchID = 'search-articles';
+
+    const rootSearchAction: Action = {
+        id: rootSearchID,
+        name: '搜索文章...',
+        shortcut: ['?'],
+        keywords: 'find',
+        section: '搜索',
+        icon: <ActionIcon className="fa-solid fa-magnifying-glass" />
+    };
+
+    const searchActions = useMemo<Action[]>(() => {
+        return [
+            createAction({
+                parent: rootSearchID,
+                name: queryValue + queryValue
+            })
+        ];
+    }, [queryValue]);
+
+    const resultActions = [rootSearchAction, ...searchActions].filter(Boolean) as Action[];
+
+    useRegisterActions(resultActions, [resultActions]);
+};

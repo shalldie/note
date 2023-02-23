@@ -8,11 +8,11 @@ import {
     KBarPositioner,
     KBarSearch,
     KBarResults,
-    createAction,
     useMatches,
     ActionImpl
 } from 'kbar';
-import {useNavActions} from './actions';
+
+import {useNavActions, useSearchActions} from './actions';
 
 const searchStyle = {
     padding: '12px 16px',
@@ -42,58 +42,6 @@ const groupNameStyle = {
     opacity: 0.5
 };
 
-const initialActions = [
-    {
-        id: 'homeAction',
-        name: 'Home',
-        shortcut: ['h'],
-        keywords: 'back',
-        section: '导航',
-        perform: () => {},
-        icon: <i className="fa fa-terminal" style={{width: '20px'}}></i>,
-        subtitle: 'Subtitles can help add more context.'
-    },
-    {
-        id: 'docsAction',
-        name: 'Docs',
-        shortcut: ['g', 'd'],
-        keywords: 'help',
-        section: '导航',
-        perform: () => {}
-    },
-    {
-        id: 'contactAction',
-        name: 'Contact',
-        shortcut: ['c'],
-        keywords: 'email hello',
-        section: '导航',
-        perform: () => window.open('mailto:timchang@hey.com', '_blank')
-    },
-    {
-        id: 'twitterAction',
-        name: 'Twitter',
-        shortcut: ['g', 't'],
-        keywords: 'social contact dm',
-        section: '导航',
-        perform: () => window.open('https://twitter.com/timcchang', '_blank')
-    },
-    createAction({
-        name: 'Github',
-        shortcut: ['g', 'h'],
-        keywords: 'sourcecode',
-        section: '导航',
-        perform: () => window.open('https://github.com/timc1/kbar', '_blank')
-    }),
-    {
-        id: 'search',
-        name: '全站搜索...',
-        subtitle: 'xxx',
-        section: '搜索',
-        shortcut: ['?']
-        // icon: <ActionIcon className="fa-solid fa-magnifying-glass" />
-    }
-];
-
 export const KProvider: React.FC<React.PropsWithChildren> = ({children}) => {
     const actions = useNavActions();
     // const {actions} = useActions();
@@ -112,7 +60,7 @@ export const KProvider: React.FC<React.PropsWithChildren> = ({children}) => {
 };
 
 function CommandBar() {
-    // useSearchActions();
+    useSearchActions();
     return (
         <KBarPortal>
             <KBarPositioner>
