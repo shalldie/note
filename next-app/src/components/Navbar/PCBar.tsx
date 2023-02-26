@@ -31,7 +31,7 @@ export const PCBar: React.FC = () => {
 
     return (
         <div className={styles['pc-bar']}>
-            <div className="container">
+            <div className="container mx-auto flex" style={{height: '60px'}}>
                 <Link className="brand" href={bar.brand.link}>
                     <img src="/favicon.png" alt={bar.brand.text} />
                     <span>{bar.brand.text}</span>

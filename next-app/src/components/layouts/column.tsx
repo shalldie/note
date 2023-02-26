@@ -21,9 +21,9 @@ import {LayoutDefault} from './default';
 export const LayoutColumn: React.FC<React.PropsWithChildren> = ({children}) => {
     return (
         <LayoutDefault className="layout-column">
-            <div className="container row" style={{marginTop: '15px'}}>
-                <div className="col-18 col-m-24">{children}</div>
-                <div className="col-6 col-m-hidden">
+            <div className="container mx-auto grid grid-cols-4 gap-2 mt-3">
+                <div className="col-span-3">{children}</div>
+                <div className="col-span-1">
                     <Sidebar />
                 </div>
             </div>

@@ -1,14 +1,19 @@
 import React from 'react';
-import styles from './Sidebar.module.scss';
 
 export const Cardwrap: React.FC = () => {
     return (
-        <div className={styles.cardwrap}>
-            <div className="card card-coffee tooltip" data-tooltip-content="捐赠一杯咖啡">
-                <i className="icon fa-solid fa-mug-saucer"></i>
+        <div className="grid grid-cols-2 gap-2">
+            <div
+                className="flex items-center justify-center rounded text-white bg-green-600 cursor-pointer duration-300 bg-opacity-75 hover:bg-opacity-50 h-20 tooltip"
+                data-tooltip-content="捐赠一杯咖啡"
+            >
+                <i className="icon fa-solid fa-mug-saucer text-5xl"></i>
             </div>
-            <div className="card card-github tooltip" data-tooltip-content="去 Github 看看">
-                <i className="icon fa-brands fa-github"></i>
+            <div
+                className="flex items-center justify-center rounded text-white bg-blue-600 cursor-pointer duration-300 bg-opacity-75 hover:bg-opacity-50 h-20 tooltip"
+                data-tooltip-content="去 Github 看看"
+            >
+                <i className="icon fa-brands fa-github text-5xl"></i>
             </div>
         </div>
     );

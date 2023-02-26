@@ -1,0 +1,83 @@
+:root {
+    --color: #{$COLOR};
+    --border-radius: #{$BORDER_RADIUS};
+    --font-size: 14px;
+    --transition: #{$TRANSITION};
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro SC', 'SF Pro Text', 'Helvetica Neue', Helvetica,
+        'PingFang SC', 'Segoe UI', Roboto, 'Hiragino Sans GB', 'Arial', 'microsoft yahei ui', 'Microsoft YaHei', SimSun,
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.428571429;
+    position: relative;
+    color: var(--color);
+    font-size: var(--font-size);
+    background: #fff;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.clearfix::after,
+.container::after {
+    clear: both;
+    display: table;
+    content: ' ';
+}
+
+/* container */
+.container {
+    position: relative;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 96%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        width: 1300px;
+    }
+}
+
+.row {
+    display: flex;
+}
+
+@for $i from 1 through 24 {
+    .col-#{$i} {
+        flex: 0 0 calc($i/24) * 100%;
+        max-width: calc($i/24) * 100%;
+    }
+    .col-offset-#{$i} {
+        margin-left: calc($i/24) * 100%;
+    }
+}
+
+@media (max-width: $MEDIA_WIDTH) {
+    @for $i from 1 through 24 {
+        .col-m-#{$i} {
+            flex: 0 0 calc($i/24) * 100%;
+            max-width: calc($i/24) * 100%;
+        }
+    }
+
+    .col-m-hidden {
+        display: none;
+    }
+}
