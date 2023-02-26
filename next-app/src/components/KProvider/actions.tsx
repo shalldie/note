@@ -57,7 +57,7 @@ export const useNavActions = () => {
 
 export const useSearchActions = () => {
     const router = useRouter();
-    const list = useAppSelector(n => n.article.list);
+    const list = useAppSelector(n => n.article.articleList);
     // const {queryValue} = useKBar(state => ({queryValue: state.searchQuery}));
 
     const rootSearchID = 'search-articles';

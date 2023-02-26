@@ -3,8 +3,36 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IArticleDetail, IArticleListItem} from './article.model';
 
 export class ArticleState {
-    list = [] as IArticleListItem[];
+    labels = [{name: 'loading...'}] as {name: string; count: number}[];
 
+    /**
+     * 最近的文章
+     *
+     * @type {IArticleListItem[]}
+     * @memberof ArticleState
+     */
+    recentList: IArticleListItem[] = [];
+
+    /**
+     * 推荐的文章
+     *
+     * @type {IArticleListItem[]}
+     * @memberof ArticleState
+     */
+    recommendList: IArticleListItem[] = [];
+
+    /**
+     * 文章列表
+     *
+     * @memberof ArticleState
+     */
+    articleList = [] as IArticleListItem[];
+
+    /**
+     * 文章详情
+     *
+     * @memberof ArticleState
+     */
     detail = null as IArticleDetail | null;
 }
 
@@ -20,9 +48,23 @@ export const articleSlice = createSlice({
 
 export const articleActions = {
     ...articleSlice.actions,
-    fetchList: createAsyncThunk('article/list', async (_: undefined, thunk) => {
+    fetchLabels: createAsyncThunk('article/fetchLabels', async (_: undefined, thunk) => {
+        const list = await http.post('article/labels');
+        thunk.dispatch(articleActions.assignState({labels: list as any}));
+    }),
+    fetchRencentList: createAsyncThunk('article/fetchRencentList', async (_: undefined, thunk) => {
+        const list = await http.post<IArticleListItem[]>('article/list', {
+            pageSize: 5
+        });
+        thunk.dispatch(articleActions.assignState({recentList: list}));
+    }),
+    fetchRecommendList: createAsyncThunk('article/fetchRecommendList', async (_: undefined, thunk) => {
+        const list = await http.post<IArticleListItem[]>('article/recommendList');
+        thunk.dispatch(articleActions.assignState({recommendList: list}));
+    }),
+    fetchArticleList: createAsyncThunk('article/fetchArticleListf', async (_: undefined, thunk) => {
         const list = await http.post<IArticleListItem[]>('article/list');
-        thunk.dispatch(articleActions.assignState({list}));
+        thunk.dispatch(articleActions.assignState({articleList: list}));
     }),
     fetchDetail: createAsyncThunk('article/info', async (name: string, thunk) => {
         const detail = await http.post<IArticleDetail>('article/info', {name});

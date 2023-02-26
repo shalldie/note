@@ -120,6 +120,11 @@ export const globalActions = {
         }
         thunk.dispatch(globalActions.assignState({serverInitialized: true}));
 
-        await thunk.dispatch(articleActions.fetchList());
+        await Promise.all([
+            //
+            thunk.dispatch(articleActions.fetchLabels()),
+            thunk.dispatch(articleActions.fetchRencentList()),
+            thunk.dispatch(articleActions.fetchRecommendList())
+        ]);
     })
 };
