@@ -35,3 +35,10 @@ export function handlePageDispatchProps(payloadAction: any, ctx: NextPageContext
         return returnProps;
     }
 }
+
+export class RndColor {
+    static get colors() {
+        const COLORS = ['#4b976a', '#3597db', '#da7d99', '#67636b', '#945fad', '#e48633'];
+        return COLORS.slice().sort(() => Math.random() - 0.5);
+    }
+}

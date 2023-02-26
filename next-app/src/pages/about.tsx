@@ -1,7 +1,7 @@
 import {NextPage} from 'next';
 import {useAppSelector, wrapper} from '~/store';
 import Head from 'next/head';
-import {LayoutColumn} from '~/components/layouts';
+import {Layout} from '~/components/layouts';
 
 const PageAbout: NextPage = props => {
     wrapper.useHydration(props);
@@ -11,7 +11,7 @@ const PageAbout: NextPage = props => {
     // const description = useAppSelector
 
     return (
-        <>
+        <Layout.Column>
             <Head>
                 <title>关于</title>
             </Head>
@@ -35,11 +35,9 @@ const PageAbout: NextPage = props => {
                 <p>技能：</p>
                 <p>写过 .net 、node、golang，现在是个切图仔，偶尔拯救世界。</p>
             </main>
-        </>
+        </Layout.Column>
     );
 };
-
-PageAbout['layout'] = LayoutColumn;
 
 // export const getServerSideProps = wrapper.getServerSideProps(store => async ctx => {
 //     // store.dispatch(articleActions.)

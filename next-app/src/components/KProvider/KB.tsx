@@ -14,7 +14,8 @@ export const KB: React.FC = () => {
                 padding: '2px 6px',
                 borderRadius: 'var(--border-radius)',
                 border: '1px solid var(--color)',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                fontWeight: 'bold'
             }}
         >
             ⌘ K

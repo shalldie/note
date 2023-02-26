@@ -56,7 +56,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.428571429;
-    color: $COLOR;
+    color: var(--color);
     background: #fff;
     position: relative;
 }

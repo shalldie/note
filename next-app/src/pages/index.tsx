@@ -1,5 +1,5 @@
 // import {KB} from '~/components/KB';
-import {LayoutColumn} from '~/components/layouts';
+import {Layout} from '~/components/layouts';
 import {useAppSelector, wrapper} from '~/store';
 // import {useAppSelector} from '~/store';
 // import Image from 'next/image';
@@ -15,14 +15,14 @@ export default function Home(props: any) {
     // const storeTime = 233;
     // console.log(storeTime);
     return (
-        <main>
-            {/* <div>{props.time}</div> */}
-            <pre>{JSON.stringify(list, null, '    ')}</pre>
-        </main>
+        <Layout.Default>
+            <main>
+                {/* <div>{props.time}</div> */}
+                <pre>{JSON.stringify(list, null, '    ')}</pre>
+            </main>
+        </Layout.Default>
     );
 }
-
-Home['layout'] = LayoutColumn;
 
 // export const getServerSideProps: GetServerSideProps<IProps> = async ctx => {
 //     const time = new Date().toLocaleString();

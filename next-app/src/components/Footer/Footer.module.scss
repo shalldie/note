@@ -5,7 +5,7 @@
 
     :global {
         .section1 {
-            background: $COLOR;
+            background: var(--color);
             padding: 80px 0 50px;
 
             h2 {

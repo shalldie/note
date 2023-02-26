@@ -1,6 +1,6 @@
-import {Action, createAction, useKBar, useRegisterActions} from 'kbar';
+import {Action, createAction, useRegisterActions} from 'kbar';
 import {useRouter} from 'next/router';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {useAppSelector} from '~/store';
 
 export const ActionIcon: React.FC<{className?: string}> = props => {
@@ -12,32 +12,53 @@ export const useNavActions = () => {
 
     const menus = useAppSelector(n => n.global.navbar.menus);
     const navActions = useMemo<Action[]>(() => {
-        const navActions = menus.map(n => {
-            return {
-                id: n.title,
-                name: n.title,
-                icon: <ActionIcon className={n.icon} />,
-                subtitle: n.subTitle,
-                section: '导航',
-                shortcut: n.shortcut,
-                perform() {
-                    if (n.link) {
-                        if (location.pathname != n.link) {
-                            router.push(n.link);
+        return menus
+            .map(n => {
+                const navAction = createAction({
+                    name: n.title,
+                    icon: <ActionIcon className={n.icon} />,
+                    subtitle: n.subTitle,
+                    section: '导航',
+                    shortcut: n.shortcut,
+                    perform: n.children
+                        ? undefined
+                        : function () {
+                              if (!n.link) {
+                                  return;
+                              }
+                              if (location.pathname != n.link) {
+                                  router.push(n.link);
+                              }
+                          }
+                });
+                const childrenActions = n.children?.map(m => {
+                    return createAction({
+                        parent: navAction.id,
+                        name: m.title,
+                        icon: <ActionIcon className={m.icon} />,
+                        perform() {
+                            if (!m.link) {
+                                return;
+                            }
+                            if (location.pathname != m.link) {
+                                router.push(m.link);
+                            }
                         }
-                    }
-                }
-            } as Action;
-        });
+                    });
+                });
 
-        return navActions;
+                return [navAction, ...(childrenActions || [])];
+            })
+            .flat();
     }, [menus, router]);
 
     return navActions;
 };
 
 export const useSearchActions = () => {
-    const {queryValue} = useKBar(state => ({queryValue: state.searchQuery}));
+    const router = useRouter();
+    const list = useAppSelector(n => n.article.list);
+    // const {queryValue} = useKBar(state => ({queryValue: state.searchQuery}));
 
     const rootSearchID = 'search-articles';
 
@@ -51,15 +72,25 @@ export const useSearchActions = () => {
     };
 
     const searchActions = useMemo<Action[]>(() => {
-        return [
+        return list.map(article =>
             createAction({
                 parent: rootSearchID,
-                name: queryValue + queryValue
+                name: article.title,
+                keywords: article.labels.concat([article.name]).join(' '),
+                perform() {
+                    router.push(`/article/${article.name}`);
+                }
             })
-        ];
-    }, [queryValue]);
+        );
+    }, [list, router]);
 
-    const resultActions = [rootSearchAction, ...searchActions].filter(Boolean) as Action[];
+    const testAction = createAction({
+        parent: searchActions[0]?.id,
+        name: 'some test',
+        keywords: 'some test'
+    });
+
+    const resultActions = [rootSearchAction, ...searchActions, testAction].filter(Boolean) as Action[];
 
     useRegisterActions(resultActions, [resultActions]);
 };

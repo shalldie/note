@@ -6,13 +6,13 @@ import {
     KBarProvider,
     KBarPortal,
     KBarPositioner,
-    KBarSearch,
     KBarResults,
     useMatches,
     ActionImpl
 } from 'kbar';
 
 import {useNavActions, useSearchActions} from './actions';
+import {KSearch} from './KSearch';
 
 const searchStyle = {
     padding: '12px 16px',
@@ -65,7 +65,8 @@ function CommandBar() {
         <KBarPortal>
             <KBarPositioner>
                 <KBarAnimator style={animatorStyle}>
-                    <KBarSearch defaultPlaceholder="导航或搜索..." style={searchStyle} />
+                    <KSearch defaultPlaceholder="导航或搜索..." style={searchStyle} />
+                    {/* <KBarSearch defaultPlaceholder="导航或搜索..." style={searchStyle} /> */}
                     <RenderResults />
                 </KBarAnimator>
             </KBarPositioner>

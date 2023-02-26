@@ -5,7 +5,6 @@ import type {AppType} from 'next/app';
 import {Provider} from 'react-redux';
 import {wrapper} from '~/store';
 import App from 'next/app';
-import {LayoutDefault} from '~/components/layouts';
 import PageError from './_error';
 import React from 'react';
 import Head from 'next/head';
@@ -40,8 +39,6 @@ const BlogApp: AppType<{error?: any}> = ({Component, pageProps}) => {
         return <PageError {...pageProps.error} />;
     }
 
-    const Layout = Component['layout'] || LayoutDefault;
-
     return (
         <>
             <AppHeadMeta />
@@ -49,9 +46,7 @@ const BlogApp: AppType<{error?: any}> = ({Component, pageProps}) => {
             <TooltipPlugin />
             <Provider store={store}>
                 <KProvider>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
+                    <Component {...pageProps} />
                 </KProvider>
             </Provider>
         </>

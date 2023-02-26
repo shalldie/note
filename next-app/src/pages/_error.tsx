@@ -1,4 +1,5 @@
 import {NextPage} from 'next';
+import {Layout} from '~/components/layouts';
 
 class PageErrorProps {
     statusCode? = 404;
@@ -11,10 +12,12 @@ const PageError: NextPage<PageErrorProps> = props => {
         ...new PageErrorProps()
     };
     return (
-        <div className="page-error">
-            <span>{statusCode}</span>
-            <span>{message}</span>
-        </div>
+        <Layout.Default>
+            <div className="page-error">
+                <span>{statusCode}</span>
+                <span>{message}</span>
+            </div>
+        </Layout.Default>
     );
 };
 

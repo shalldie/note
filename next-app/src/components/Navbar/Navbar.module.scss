@@ -10,7 +10,7 @@ $topColor: #fff;
     position: relative;
     // transition: $TRANSITION;
     height: $PC_BAR_Height;
-    background-color: $COLOR;
+    background-color: var(--color);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 
     :global {
@@ -34,7 +34,7 @@ $topColor: #fff;
             }
             span {
                 margin-left: 10px;
-                text-shadow: 1px 1px 3px $COLOR;
+                text-shadow: 1px 1px 3px var(--color);
             }
         }
         .menu-bar {
@@ -85,7 +85,7 @@ $topColor: #fff;
 .list-menu {
     position: absolute;
     display: none;
-    border-radius: $BORDER_RADIUS;
+    border-radius: var(--border-radius);
     border-top-right-radius: 0;
     top: 100%;
     right: 0;
@@ -111,7 +111,7 @@ $topColor: #fff;
 
         a {
             display: block;
-            color: $COLOR;
+            color: var(--color);
             text-decoration: none;
             // height: 20px;
             line-height: 20px;
