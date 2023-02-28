@@ -2,16 +2,18 @@ import 'normalize.css';
 import '~/assets/styles/main.css';
 import '~/assets/styles/main.scss';
 
-import type {AppType} from 'next/app';
-import {Provider} from 'react-redux';
-import {wrapper} from '~/store';
-import App from 'next/app';
-import PageError from './_error';
 import React from 'react';
+import App from 'next/app';
 import Head from 'next/head';
+import type {AppType} from 'next/app';
+
+import {Provider} from 'react-redux';
 import NextNProgress from 'nextjs-progressbar';
-import {TooltipPlugin} from '~/components/TooltipPlugin';
+
+import {wrapper} from '~/store';
+import PageError from './_error';
 import {globalActions} from '~/store/global';
+import {TooltipPlugin} from '~/components/TooltipPlugin';
 import {KProvider} from '~/components/KProvider';
 
 const AppHeadMeta: React.FC = () => {

@@ -1,5 +1,4 @@
 import axios, {AxiosError} from 'axios';
-import {URL} from 'url';
 import {isServer} from './utils';
 
 const instance = axios.create({

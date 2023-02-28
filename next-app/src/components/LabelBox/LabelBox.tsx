@@ -1,35 +1,41 @@
+import React, {useMemo} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import React, {useMemo} from 'react';
+
+import classNames from 'classnames';
 import {When} from 'react-if';
+
+import {useLoad} from '~/libs/hooks';
 import {RndColor} from '~/libs/utils';
+import {useAppSelector} from '~/store';
+
 import styles from './LabelBox.module.scss';
 
-export interface ILabelBoxProps {
-    list: {name: string; count: number}[];
-}
-
-export const LabelBox: React.FC<ILabelBoxProps> = props => {
+export const LabelBox: React.FC<{className?: string}> = props => {
     const router = useRouter();
+    const loaded = useLoad();
+    const labels = useAppSelector(n => n.article.labels);
 
-    const labels = useMemo(() => {
-        return props.list.map((label, index) => {
+    const labelList = useMemo(() => {
+        return labels.map((label, index) => {
             return {
                 ...label,
                 content: label.name + (label.count ? `(${label.count})` : ''),
-                bgColor: RndColor.colors[index % RndColor.colors.length]
+                bgColor: loaded ? RndColor.colors[index % RndColor.colors.length] : 'gray'
             };
         });
-    }, [props.list]);
+    }, [labels, loaded]);
 
     const curLabel = useMemo(() => {
-        return labels.find(n => n.name === router.query.label);
-    }, [router, labels]);
+        return labelList.find(n => n.name === router.query.label);
+    }, [router, labelList]);
+
+    const cls = classNames(styles.labelbox, props.className);
 
     return (
-        <div className={styles.labelbox}>
+        <div className={cls}>
             <When condition={!!curLabel}></When>
-            {labels.map((label, index) => (
+            {labelList.map((label, index) => (
                 <Link
                     href={`/article?label=${label.name}`}
                     className="label"

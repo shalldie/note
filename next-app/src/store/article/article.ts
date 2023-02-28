@@ -1,5 +1,6 @@
-import {http} from '~/libs/http';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+
+import {http} from '~/libs/http';
 import {IArticleDetail, IArticleListItem} from './article.model';
 
 export class ArticleState {

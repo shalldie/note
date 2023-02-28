@@ -1,9 +1,10 @@
 import {NextPage} from 'next';
-import {Markdown} from '~/components/Markdown';
-import {http} from '~/libs/http';
 import Head from 'next/head';
-import {Layout} from '~/components/layouts';
+
+import {http} from '~/libs/http';
 import {wrapper} from '~/store';
+import {Markdown} from '~/components/Markdown';
+import {Layout} from '~/components/layouts';
 
 const PageLog: NextPage<{markdown: string}> = ({markdown, ...props}) => {
     wrapper.useHydration(props);

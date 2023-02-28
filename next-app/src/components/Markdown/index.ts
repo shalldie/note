@@ -1,6 +1,3 @@
-import dynamic from 'next/dynamic';
-import React from 'react';
-
 export * from './Markdown';
 
 // export const Markdown = dynamic(() =>

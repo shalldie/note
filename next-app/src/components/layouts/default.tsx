@@ -1,14 +1,22 @@
 import React from 'react';
-import cn from 'classnames';
-import {Footer} from '../Footer';
-import {Navbar} from '../Navbar';
-// import {NinjaKeys} from '../NinjaKeys';
 
-export const LayoutDefault: React.FC<React.PropsWithChildren<{className?: string}>> = ({children, className}) => {
+import classNames from 'classnames';
+import {When} from 'react-if';
+
+import {Footer} from '../Footer';
+import {INavCover, Navbar, NavCover} from '../Navbar';
+
+export interface ILayoutDefaultProps extends React.PropsWithChildren<IClassName> {
+    cover?: INavCover;
+}
+
+export const LayoutDefault: React.FC<ILayoutDefaultProps> = ({children, className, ...props}) => {
     return (
-        <div className={cn('layout-default', className)}>
-            {/* <NinjaKeys /> */}
-            <Navbar />
+        <div className={classNames('layout-default', className)}>
+            <Navbar light={!!props.cover} />
+            <When condition={!!props.cover}>
+                <NavCover {...props.cover!} />
+            </When>
             {children}
             <Footer />
         </div>

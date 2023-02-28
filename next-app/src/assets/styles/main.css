@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer utilities {
+    .container {
+        position: relative;
+        @apply mx-auto;
+    }
+
+    @screen md {
+        .container {
+            max-width: 96%;
+        }
+    }
+
+    /* 颜色 */
     .color {
         color: var(--color);
     }
@@ -11,6 +23,7 @@
         background-color: var(--color);
     }
 
+    /* 圆角 */
     .rounded {
         border-radius: var(--border-radius);
     }
@@ -23,5 +36,10 @@
     .rounded-b {
         border-bottom-left-radius: var(--border-radius);
         border-bottom-right-radius: var(--border-radius);
+    }
+
+    /* 渐变 */
+    .duration {
+        transition-duration: var(--transition);
     }
 }

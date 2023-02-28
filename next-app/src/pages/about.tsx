@@ -1,6 +1,7 @@
 import {NextPage} from 'next';
-import {useAppSelector, wrapper} from '~/store';
 import Head from 'next/head';
+
+import {useAppSelector, wrapper} from '~/store';
 import {Layout} from '~/components/layouts';
 
 const PageAbout: NextPage = props => {

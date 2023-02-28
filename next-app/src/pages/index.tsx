@@ -1,4 +1,4 @@
-import {Layout} from '~/components/layouts';
+import {cover, Layout} from '~/components/layouts';
 import {useAppSelector, wrapper} from '~/store';
 
 export default function Home(props: any) {
@@ -6,7 +6,7 @@ export default function Home(props: any) {
     const list = useAppSelector(n => n.article.recentList);
 
     return (
-        <Layout.Default>
+        <Layout.Default cover={cover.main}>
             <main>
                 <pre>{JSON.stringify(list, null, '    ')}</pre>
             </main>

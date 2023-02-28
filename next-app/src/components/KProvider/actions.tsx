@@ -1,6 +1,8 @@
-import {Action, createAction, useRegisterActions} from 'kbar';
-import {useRouter} from 'next/router';
 import React, {useMemo} from 'react';
+import {useRouter} from 'next/router';
+
+import {Action, createAction, useRegisterActions} from 'kbar';
+
 import {useAppSelector} from '~/store';
 
 export const ActionIcon: React.FC<{className?: string}> = props => {
@@ -84,13 +86,7 @@ export const useSearchActions = () => {
         );
     }, [list, router]);
 
-    const testAction = createAction({
-        parent: searchActions[0]?.id,
-        name: 'some test',
-        keywords: 'some test'
-    });
-
-    const resultActions = [rootSearchAction, ...searchActions, testAction].filter(Boolean) as Action[];
+    const resultActions = [rootSearchAction, ...searchActions].filter(Boolean) as Action[];
 
     useRegisterActions(resultActions, [resultActions]);
 };

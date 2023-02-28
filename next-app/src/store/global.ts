@@ -3,6 +3,7 @@
  */
 
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+
 import {articleActions} from './article';
 import {TRootState} from '.';
 
@@ -80,25 +81,19 @@ export class GlobalState {
          * 目录索引列表
          * @type { Array<{text:string;id:string;level:number}> }
          */
-        indexList: [],
-        labels: {
-            title: '标签',
-            list: [{name: 'loading...'}] as {name: string; count: number}[]
-        },
-        friendLinks: {
-            title: '友情链接',
-            list: [
-                {
-                    text: 'linkFly - tasaid 听说',
-                    link: 'https://tasaid.com/'
-                },
-                {
-                    text: '剧中人 - bh-lay',
-                    link: 'http://bh-lay.com/'
-                }
-            ]
-        }
+        indexList: []
     };
+
+    friendLinks = [
+        {
+            title: 'linkFly - tasaid 听说',
+            link: 'https://tasaid.com/'
+        },
+        {
+            title: '剧中人 - bh-lay',
+            link: 'http://bh-lay.com/'
+        }
+    ];
 }
 
 export const globalSlice = createSlice({
@@ -122,6 +117,7 @@ export const globalActions = {
 
         await Promise.all([
             //
+            thunk.dispatch(articleActions.fetchArticleList()),
             thunk.dispatch(articleActions.fetchLabels()),
             thunk.dispatch(articleActions.fetchRencentList()),
             thunk.dispatch(articleActions.fetchRecommendList())

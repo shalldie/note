@@ -10,7 +10,7 @@ export function sleep(delay = 0) {
     });
 }
 
-export function handlePageDispatchProps(payloadAction: any, ctx: NextPageContext<any>) {
+export function handlePageDispatchProps(payloadAction: any, ctx: NextPageContext) {
     const payload = payloadAction as {error?: {message?: string}};
     // 没错误
     if (!payload.error) {

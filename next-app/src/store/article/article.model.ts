@@ -1,6 +1,6 @@
 export interface IArticleDetail {
     title: string;
-    publicTime: number;
+    publishTime: number;
     cover: string;
     content: string;
     prev: {name: string; title: string};

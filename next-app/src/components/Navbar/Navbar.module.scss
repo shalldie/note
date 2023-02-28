@@ -1,11 +1,8 @@
-.navbar {
-}
-
 $PC_BAR_Height: 60px;
 $topColor: #fff;
 
 // PC
-.pc-bar {
+.pcbar {
     // z-index: 999;
     position: relative;
     // transition: $TRANSITION;
@@ -39,6 +36,42 @@ $topColor: #fff;
         }
         .menu-bar {
             margin-left: auto;
+        }
+    }
+
+    // 浅色主题
+
+    &.light {
+        background-color: transparent;
+        background: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+        // background: linear-gradient(rgba(255, 255, 255, 0.4), transparent);
+        // box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+        box-shadow: none;
+        // margin-bottom: -$topHeight;
+
+        :global {
+            .brand {
+                font-size: 16px;
+            }
+
+            .brand,
+            .menu-item-text {
+                font-weight: bold;
+                color: darken($COLOR, 6%);
+                color: #fff;
+                text-shadow: 2px 2px 8px lighten($COLOR, 20%);
+            }
+
+            .menu-item {
+                &:hover {
+                    background: rgba(255, 255, 255, 0.45);
+                }
+            }
+
+            .list-menu {
+                border: none;
+                background-color: rgba(255, 255, 255, 0.45);
+            }
         }
     }
 }
@@ -77,7 +110,7 @@ $topColor: #fff;
         background-color: #262c35;
 
         ul {
-            display: block;
+            display: block !important;
         }
     }
 }
@@ -132,5 +165,19 @@ $topColor: #fff;
     }
 }
 
-.mobile-bar {
+// cover 三角
+.triangle {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: 0;
+        left: 0;
+        border-color: transparent #fff;
+        border-style: solid;
+        border-width: 50px 100vw 0 0;
+    }
 }

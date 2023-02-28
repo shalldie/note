@@ -14,6 +14,9 @@ import {
 import {useNavActions, useSearchActions} from './actions';
 import {KSearch} from './KSearch';
 
+// const BG_COLOR = 'var(--color-gray)';
+const BG_COLOR = '#fff';
+
 const searchStyle = {
     padding: '12px 16px',
     fontSize: '16px',
@@ -21,14 +24,14 @@ const searchStyle = {
     boxSizing: 'border-box' as React.CSSProperties['boxSizing'],
     outline: 'none',
     border: 'none',
-    background: '#fff',
+    background: BG_COLOR,
     color: 'var(--color)'
 };
 
 const animatorStyle = {
     maxWidth: '600px',
     width: '100%',
-    background: '#fff',
+    background: BG_COLOR,
     color: 'var(--color)',
     borderRadius: '8px',
     overflow: 'hidden',
@@ -62,8 +65,8 @@ export const KProvider: React.FC<React.PropsWithChildren> = ({children}) => {
 function CommandBar() {
     useSearchActions();
     return (
-        <KBarPortal>
-            <KBarPositioner>
+        <KBarPortal data-xxx>
+            <KBarPositioner style={{backdropFilter: 'blur(5px)'}}>
                 <KBarAnimator style={animatorStyle}>
                     <KSearch defaultPlaceholder="导航或搜索..." style={searchStyle} />
                     {/* <KBarSearch defaultPlaceholder="导航或搜索..." style={searchStyle} /> */}

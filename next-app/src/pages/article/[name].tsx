@@ -1,15 +1,29 @@
 import {NextPage} from 'next';
+
+import dayjs from 'dayjs';
+
+import {cover, Layout} from '~/components/layouts';
 import {articleActions, useAppSelector, wrapper} from '~/store';
 import {Markdown} from '~/components/Markdown';
 import {handlePageDispatchProps} from '~/libs/utils';
-import {Layout} from '~/components/layouts';
 
 const ArticleDetail: NextPage = props => {
     wrapper.useHydration(props);
     const detail = useAppSelector(n => n.article.detail!);
 
+    const detailCover = {
+        ...cover.detail,
+        content: [
+            //
+            detail.title,
+            <div className="text-[14px]" key={detail.title}>
+                {dayjs(detail.publishTime).format('YYYY/MM/DD HH:mm:ss')}
+            </div>
+        ]
+    };
+
     return (
-        <Layout.Column>
+        <Layout.Column cover={detailCover}>
             <main className="page-article-detail">
                 <Markdown content={detail.content} />
                 {/* <pre>{JSON.stringify(detail?.content, null, '    ')}</pre> */}
