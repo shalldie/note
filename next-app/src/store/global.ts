@@ -73,6 +73,7 @@ export class GlobalState {
     };
 
     sidebar = {
+        show: true,
         /**
          * 是否显示目录
          */

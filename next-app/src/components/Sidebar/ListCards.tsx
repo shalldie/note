@@ -11,7 +11,7 @@ interface ICardItemProps {
 
 const CardBox: React.FC<React.PropsWithChildren<ICardItemProps>> = props => {
     return (
-        <div className="card-item mt-5">
+        <div className="card-item mt-5 duration hover:shadow-lg">
             <div className="bg-color rounded-t h-10 text-white flex items-center pl-2">
                 <span className="mr-2 font-bold">{props.title}</span>
                 {props.icon}

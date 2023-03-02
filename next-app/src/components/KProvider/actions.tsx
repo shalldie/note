@@ -78,7 +78,7 @@ export const useSearchActions = () => {
             createAction({
                 parent: rootSearchID,
                 name: article.title,
-                keywords: article.labels.concat([article.name]).join(' '),
+                keywords: [...article.labels, article.name, article.title.replace(/\s*/g, ' ')].join(' '),
                 perform() {
                     router.push(`/article/${article.name}`);
                 }

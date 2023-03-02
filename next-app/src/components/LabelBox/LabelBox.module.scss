@@ -1,7 +1,12 @@
 .labelbox {
     overflow: hidden;
     padding: 16px 5px 4px 20px;
+    transition: var(--transition);
     background: var(--color-gray);
+
+    &:hover {
+        @apply shadow-xl;
+    }
 
     :global {
         .cur-wrap {
