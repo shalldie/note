@@ -9,8 +9,8 @@ export const Layout = {
 export const cover = {
     main: {
         style: {
-            // backgroundImage: `url(${process.env.CDN_PREFIX}images/banner/banner_sky.jpg)`,
-            backgroundImage: 'url(/hotel.jpeg)',
+            backgroundImage: `url(${process.env.CDN_PREFIX}images/banner/banner_sky.jpg)`,
+            // backgroundImage: 'url(/hotel.jpeg)',
             height: '700px',
             backgroundPosition: 'center bottom'
         },

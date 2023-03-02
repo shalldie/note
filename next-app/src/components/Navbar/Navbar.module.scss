@@ -168,6 +168,7 @@ $topColor: #fff;
 // cover 三角
 .triangle {
     position: relative;
+    overflow: hidden;
 
     &::after {
         content: '';

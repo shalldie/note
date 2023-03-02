@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import {IArticleListItem, useAppSelector} from '~/store';
 import {LabelBox} from '../LabelBox';
+import classNames from 'classnames';
 
 interface ICardItemProps {
     title: string;
@@ -11,7 +12,7 @@ interface ICardItemProps {
 
 const CardBox: React.FC<React.PropsWithChildren<ICardItemProps>> = props => {
     return (
-        <div className="card-item mt-5 duration hover:shadow-lg">
+        <div className="card-item mt-5 duration rounded-b hover:shadow-lg">
             <div className="bg-color rounded-t h-10 text-white flex items-center pl-2">
                 <span className="mr-2 font-bold">{props.title}</span>
                 {props.icon}
@@ -23,13 +24,16 @@ const CardBox: React.FC<React.PropsWithChildren<ICardItemProps>> = props => {
 
 const ListBox: React.FC<{list: {title: string; link: string; target?: string}[]}> = props => {
     return (
-        <div className="rounded-b">
+        <div>
             {props.list.map((item, index) => (
                 <Link
                     href={item.link}
                     target={item.target}
                     key={index}
-                    className="block no-underline text-[#337ab7] leading-10 px-5 duration border border-solid border-t-0 border-[var(--color-gray)] hover:shadow-xl hover:text-[var(--color)] hover:bg-[#efefef]"
+                    className={classNames(
+                        'block no-underline text-[#337ab7] leading-10 px-5 duration border border-solid border-t-0 border-[#eee] hover:shadow-xl hover:text-[var(--color)] hover:bg-[#efefef]',
+                        {'rounded-b': index === props.list.length - 1}
+                    )}
                 >
                     {item.title}
                 </Link>
