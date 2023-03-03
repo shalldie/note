@@ -49,3 +49,8 @@
         transition-duration: var(--transition);
     }
 }
+
+.link {
+    @apply text-blue-500 no-underline;
+    @apply hover:text-opacity-80 hover:underline;
+}
