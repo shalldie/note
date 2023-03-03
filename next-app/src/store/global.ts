@@ -118,7 +118,7 @@ export const globalActions = {
 
         await Promise.all([
             //
-            thunk.dispatch(articleActions.fetchArticleList()),
+            thunk.dispatch(articleActions.fetchArticleList({})),
             thunk.dispatch(articleActions.fetchLabels()),
             thunk.dispatch(articleActions.fetchRencentList()),
             thunk.dispatch(articleActions.fetchRecommendList())

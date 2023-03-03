@@ -63,8 +63,8 @@ export const articleActions = {
         const list = await http.post<IArticleListItem[]>('article/recommendList');
         thunk.dispatch(articleActions.assignState({recommendList: list}));
     }),
-    fetchArticleList: createAsyncThunk('article/fetchArticleListf', async (_: undefined, thunk) => {
-        const list = await http.post<IArticleListItem[]>('article/list');
+    fetchArticleList: createAsyncThunk('article/fetchArticleList', async (payload: any = {} as any, thunk) => {
+        const list = await http.post<IArticleListItem[]>('article/list', payload);
         thunk.dispatch(articleActions.assignState({articleList: list}));
     }),
     fetchDetail: createAsyncThunk('article/info', async (name: string, thunk) => {

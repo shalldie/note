@@ -23,7 +23,7 @@ export default function Home(props: any) {
                             更多文章
                         </Link>
                     </div>
-                    <div className="container mt-5 px-10 grid gap-x-20 gap-y-9 grid-cols-1 md:grid-cols-3">
+                    <div className="container mt-5 px-10 grid gap-x-10 gap-y-9 grid-cols-1 md:grid-cols-3">
                         {recentList.slice(0, 3).map((article, index) => (
                             <ArticleCoverCard {...article} key={index} />
                         ))}
@@ -41,7 +41,7 @@ export default function Home(props: any) {
                             更多文章
                         </Link>
                     </div>
-                    <div className="container mt-5 px-10 grid gap-x-20 gap-y-9 grid-cols-1 md:grid-cols-3">
+                    <div className="container mt-5 px-10 grid gap-x-10 gap-y-9 grid-cols-1 md:grid-cols-3">
                         {recommendList.slice(0, 6).map((article, index) => (
                             <ArticleCoverCard {...article} key={index} />
                         ))}

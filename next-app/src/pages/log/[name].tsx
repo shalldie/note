@@ -13,7 +13,7 @@ const PageLog: NextPage<{markdown: string}> = ({markdown, ...props}) => {
             <Head>
                 <title>日志</title>
             </Head>
-            <main className="page-log" style={{padding: '15px 15px 60px', color: '#444'}}>
+            <main className="page-log">
                 <Markdown content={markdown} />
             </main>
         </Layout.Column>

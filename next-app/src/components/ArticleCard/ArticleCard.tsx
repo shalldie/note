@@ -1,6 +1,9 @@
-import dayjs from 'dayjs';
+import React from 'react';
 import Link from 'next/link';
-import React, {useMemo} from 'react';
+
+import classNames from 'classnames';
+import dayjs from 'dayjs';
+
 import {IArticleListItem} from '~/store';
 
 export class ArticleCardProps {
@@ -8,9 +11,14 @@ export class ArticleCardProps {
     mode: 'cover' | 'list' = 'cover';
 }
 
-export const ArticleItemCard: React.FC<IArticleListItem> = props => {
+export const ArticleItemCard: React.FC<IArticleListItem & IClassName> = props => {
     return (
-        <div className="article-item-card group rounded no-underline overflow-hidden duration text-center color bg-[var(--color-gray)] hover:shadow-2xl">
+        <div
+            className={classNames(
+                props.className,
+                'article-item-card group rounded no-underline overflow-hidden duration text-center color bg-[var(--color-gray)] hover:shadow-2xl'
+            )}
+        >
             <Link className="block pb-[60%] relative overflow-hidden" href={`/article/${props.name}`}>
                 <img
                     src={props.cover}
@@ -18,17 +26,21 @@ export const ArticleItemCard: React.FC<IArticleListItem> = props => {
                     className="w-[100%] h-[100%] absolute inset-0 object-cover duration group-hover:scale-110"
                 />
             </Link>
-            <h3 className="mt-[20px] mb-[10px] duration group-hover:text-blue-600 group-hover:text-opacity-80">
-                <Link className="link" href={`/article/${props.name}`}>
+            <h4 className="mt-[20px] mb-[16px] duration">
+                <Link
+                    className="duration no-underline text-[20px] text-[var(--color)] hover:text-[var(--color-red)]"
+                    href={`/article/${props.name}`}
+                >
                     {props.title}
                 </Link>
-            </h3>
+            </h4>
             <div className="pb-6">
                 {props.labels.map((lbl, index) => (
                     <Link
                         href={`/article?label=${lbl}`}
                         key={index}
-                        className="inline-block rounded duration no-underline text-white bg-[var(--color)] font-bold text-[12px] mx-1 py-[3px] px-[10px] hover:bg-[var(--color-red)]"
+                        style={{textShadow: '3px 3px 3px var(--color)'}}
+                        className="inline-block rounded duration no-underline text-white bg-[var(--color)] font-bold text-[12px] mx-1 py-[3px] px-[10px] hover:bg-[var(--color-red)] hover:shadow-2xl"
                     >
                         {lbl}
                     </Link>

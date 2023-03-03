@@ -29,7 +29,7 @@ export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({children, className
             </div>
             <div className="container mx-auto grid grid-cols-8 gap-5 my-5">
                 <div
-                    className={classNames('col-span-8 md:col-span-6 duration', {
+                    className={classNames('duration col-span-8 px-5 md:px-0 md:col-span-6', {
                         'md:translate-x-[16.6667%]': !sidebar.show
                     })}
                 >
