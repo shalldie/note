@@ -13,7 +13,7 @@ interface ICardItemProps {
 const CardBox: React.FC<React.PropsWithChildren<ICardItemProps>> = props => {
     return (
         <div className="card-item mt-5 duration rounded-b hover:shadow-lg">
-            <div className="bg-color rounded-t h-10 text-white flex items-center pl-2">
+            <div className="bg-color rounded-t h-10 text-white flex items-center pl-5">
                 <span className="mr-2 font-bold">{props.title}</span>
                 {props.icon}
             </div>
@@ -31,7 +31,7 @@ const ListBox: React.FC<{list: {title: string; link: string; target?: string}[]}
                     target={item.target}
                     key={index}
                     className={classNames(
-                        'block no-underline text-[#337ab7] leading-10 px-5 duration border border-solid border-t-0 border-[#eee] hover:shadow-xl hover:text-[var(--color)] hover:bg-[#efefef]',
+                        'block link leading-10 px-5 duration border border-solid border-t-0 border-[#eee] hover:shadow-xl hover:bg-[#efefef]',
                         {'rounded-b': index === props.list.length - 1}
                     )}
                 >

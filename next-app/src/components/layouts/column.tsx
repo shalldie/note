@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -27,7 +27,7 @@ export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({children, className
             <div>
                 <button onClick={toggle}>toggle sidebar</button>
             </div>
-            <div className="container mx-auto grid grid-cols-8 gap-5 my-5">
+            <div className="container mx-auto grid grid-cols-8 gap-5 my-10">
                 <div
                     className={classNames('duration col-span-8 px-5 md:px-0 md:col-span-6', {
                         'md:translate-x-[16.6667%]': !sidebar.show

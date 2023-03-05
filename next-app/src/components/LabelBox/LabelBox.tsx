@@ -34,7 +34,19 @@ export const LabelBox: React.FC<{className?: string}> = props => {
 
     return (
         <div className={cls}>
-            <When condition={!!curLabel}></When>
+            <When condition={!!curLabel}>
+                <div className="font-bold text-[14px] mb-5 flex items-center">
+                    <span>当前展示：</span>
+                    <Link
+                        className="tooltip group rounded duration overflow-hidden no-underline text-[12px] color border border-r-0 border-solid border-[var(--color)] hover:border-[var(--color-red)] hover:text-[var(--color-red)] hover:shadow-xl"
+                        data-tooltip-content="清除标签"
+                        href="/article"
+                    >
+                        <span className="py-1 px-3">{`${curLabel?.name}(${curLabel?.count})`}</span>
+                        <i className="fa fa-close py-1 px-3 duration bg-[var(--color)] text-white group-hover:bg-[var(--color-red)]"></i>
+                    </Link>
+                </div>
+            </When>
             {labelList.map((label, index) => (
                 <Link
                     href={`/article?label=${label.name}`}

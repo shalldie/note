@@ -3,15 +3,17 @@ import {NextPage} from 'next';
 import dayjs from 'dayjs';
 
 import {cover, Layout} from '~/components/layouts';
-import {articleActions, useAppSelector, wrapper} from '~/store';
+import {articleActions, ARTICLE_MD_CLS, useAppSelector, wrapper} from '~/store';
 import {Markdown} from '~/components/Markdown';
 import {handlePageDispatchProps} from '~/libs/utils';
+import {GitComment} from '~/components/GitComment';
+import {useRouter} from 'next/router';
+import {ArticleIndex} from '~/components/Sidebar/ArticleIndex';
 
-const ArticleDetail: NextPage = props => {
-    wrapper.useHydration(props);
+const useCover = () => {
     const detail = useAppSelector(n => n.article.detail!);
 
-    const detailCover = {
+    return {
         ...cover.detail,
         content: [
             //
@@ -21,12 +23,21 @@ const ArticleDetail: NextPage = props => {
             </div>
         ]
     };
+};
+
+const ArticleDetail: NextPage = props => {
+    wrapper.useHydration(props);
+
+    const router = useRouter();
+    const detail = useAppSelector(n => n.article.detail!);
+
+    const cover = useCover();
 
     return (
-        <Layout.Column cover={detailCover}>
+        <Layout.Column cover={cover}>
             <main className="page-article-detail">
-                <Markdown content={detail.content} />
-                {/* <pre>{JSON.stringify(detail?.content, null, '    ')}</pre> */}
+                <Markdown content={detail.content} className={ARTICLE_MD_CLS} />
+                <GitComment uuid={`/article/${router.query.name}`} className="mt-5" />
             </main>
         </Layout.Column>
     );

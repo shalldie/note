@@ -1,0 +1,52 @@
+.articleindex {
+    :global {
+        .ai-title {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+            padding-left: 22px;
+        }
+
+        .ai-item {
+            display: block;
+            cursor: pointer;
+            position: relative;
+            color: #649adf;
+            text-decoration: none;
+            height: 28px;
+            line-height: 28px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: 0.3s;
+            border-left: 5px solid transparent;
+            padding-right: 10px;
+
+            &.active {
+                border-left-color: rgb(59 130 246 / 0.75);
+                background: rgba(0, 0, 0, 0.05);
+            }
+
+            &::before {
+                content: '';
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: #333;
+                position: absolute;
+                top: 50%;
+                margin-top: -2px;
+            }
+        }
+
+        @for $i from 1 through 6 {
+            .h#{$i} {
+                padding-left: 22px + 30px * ($i - 1);
+
+                &::before {
+                    left: 12px + 30px * ($i - 1);
+                }
+            }
+        }
+    }
+}
