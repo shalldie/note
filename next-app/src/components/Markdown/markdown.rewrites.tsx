@@ -1,10 +1,17 @@
 // const generateH
 
-import classNames from 'classnames';
 import React, {useEffect, useState} from 'react';
+import dynamic from 'next/dynamic';
+
+import classNames from 'classnames';
 import {SpecialComponents} from 'react-markdown/lib/ast-to-react';
 import {NormalComponents} from 'react-markdown/lib/complex-types';
+
 import {DynamicComponent} from '../DynamicComponent';
+// import {SyntaxHighlighter, theme} from './syntax';
+
+export const SyntaxHighlighter = dynamic(() => import('react-syntax-highlighter').then(n => n.Prism), {ssr: false});
+import theme from 'react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus';
 
 type TRewriteHandler = Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents>;
 
@@ -70,5 +77,31 @@ export const markdownRewrites: TRewriteHandler = {
                 />
             </a>
         );
+    },
+    code({node: _, inline, className, children, ...props}) {
+        const match = /language-(\w+)/.exec(className || '');
+        return !inline && match ? (
+            <SyntaxHighlighter
+                children={String(children).replace(/\n$/, '')}
+                style={theme as any}
+                language={match[1]}
+                PreTag={({...props}) => <pre className="syntax-pre" {...props}></pre>}
+                showLineNumbers
+                {...props}
+            />
+        ) : (
+            <code className={className} {...props}>
+                {children}
+            </code>
+        );
+    },
+    pre: ({node: _, ...props}) => {
+        const hasSyntax = /language-(\w+)/.test((props.children[0] as any)?.props?.className || '');
+
+        if (hasSyntax) {
+            return <>{props.children}</>;
+        }
+
+        return <pre>{props.children}</pre>;
     }
 };

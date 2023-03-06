@@ -46,7 +46,7 @@ export const ScrollAffix: React.FC<React.PropsWithChildren<IScrollAffixProps>> =
                 parallelScripts={['https://cdn.jsdelivr.net/npm/scroll-affix@0.0.2/dist/scroll-affix.min.js']}
                 onReady={() => setReady(true)}
             />
-            <div ref={root} style={{width: width + 'px'}}>
+            <div ref={root} className={props.className} style={{width: width + 'px'}}>
                 {props.children}
             </div>
         </>

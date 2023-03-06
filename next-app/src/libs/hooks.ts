@@ -32,3 +32,19 @@ export const useParentSize = (cur: React.RefObject<HTMLElement>) => {
 
     return state;
 };
+
+export function useLocalStorage<T>(key: string, initValue: T) {
+    const targetInitValue = JSON.stringify(initValue);
+    const curStorage = localStorage.getItem(key) || targetInitValue;
+    localStorage.setItem(key, curStorage);
+
+    const [state, setState] = useState<T>(JSON.parse(curStorage));
+
+    return [
+        state,
+        (newVal: T) => {
+            localStorage.setItem(key, JSON.stringify(newVal));
+            setState(newVal);
+        }
+    ] as const;
+}

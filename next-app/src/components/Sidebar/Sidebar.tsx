@@ -17,7 +17,12 @@ export const Sidebar: React.FC = () => {
 
     return (
         <div className="sidebar">
-            <ScrollAffix enable={showIndex} sectionSelector={'.' + ARTICLE_MD_CLS} offsetTop={30}>
+            <ScrollAffix
+                enable={showIndex}
+                sectionSelector={'.' + ARTICLE_MD_CLS}
+                offsetTop={30}
+                className="max-h-[90%] overflow-y-auto"
+            >
                 <Cardwrap />
                 <When condition={showIndex}>
                     <ArticleIndex />

@@ -10,6 +10,7 @@ module.exports = async (_phase, {defaultConfig: _defaultConfig}) => {
         env: {
             CDN_PREFIX: process.env.CDN_PREFIX
         },
+        transpilePackages: ['react-syntax-highlighter'],
         sassOptions: {
             prependData: [
                 //

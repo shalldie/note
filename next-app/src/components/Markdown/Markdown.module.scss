@@ -48,7 +48,9 @@
         }
 
         a {
-            @apply link;
+            // @apply link;
+            @apply text-blue-500 no-underline;
+            @apply hover:text-opacity-80 hover:underline;
         }
 
         p,
@@ -59,7 +61,7 @@
         // 区块引用
         blockquote {
             padding: 16px;
-            border-left: 4px solid #56a1d6;
+            border-left: 4px solid var(--color-blue);
             background-color: #f8f8f8;
             color: #3a4046;
         }
@@ -70,14 +72,8 @@
         // 代码块
         pre {
             background: #fdf6e3;
-            color: #3d4d52;
-            font-size: 14px;
             -webkit-overflow-scrolling: touch;
-
-            // 注释
-            .hljs-comment {
-                color: #2aa198;
-            }
+            border-radius: var(--border-radius);
         }
     }
 }

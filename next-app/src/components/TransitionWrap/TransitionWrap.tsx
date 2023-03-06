@@ -9,15 +9,23 @@ const FadeClassName = {
     exitActive: styles.fadeExitActive
 };
 
+const SlideClassName = {
+    enter: styles.slideEnter,
+    enterActive: styles.slideEnterActive,
+    exit: styles.slideExit,
+    exitActive: styles.slideExitActive
+};
+
 export interface ITransitionWrapProps {
     in?: boolean;
-    mode?: 'fade';
+    mode?: 'fade' | 'slide';
 }
 
 export const TransitionWrap: React.FC<React.PropsWithChildren<ITransitionWrapProps>> = props => {
     const classNames = useMemo(() => {
         return {
-            fade: FadeClassName
+            fade: FadeClassName,
+            slide: SlideClassName
         }[props.mode || 'fade'];
     }, [props.mode]);
 

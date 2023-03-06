@@ -4,29 +4,16 @@ import classNames from 'classnames';
 
 import {Sidebar} from '../Sidebar';
 import {ILayoutDefaultProps, LayoutDefault} from './default';
-import {useAppDispatch, useAppSelector} from '~/store';
-import {globalActions} from '~/store/global';
+import {useAppSelector} from '~/store';
 import {TransitionWrap} from '../TransitionWrap';
+import {FloatBar} from '../FloatBar';
 
 export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({children, className, ...props}) => {
-    const dispatch = useAppDispatch();
     const sidebar = useAppSelector(n => n.global.sidebar);
-    const toggle = () => {
-        dispatch(
-            globalActions.assignState({
-                sidebar: {
-                    ...sidebar,
-                    show: !sidebar.show
-                }
-            })
-        );
-    };
 
     return (
         <LayoutDefault className={classNames('layout-column', className)} {...props}>
-            <div>
-                <button onClick={toggle}>toggle sidebar</button>
-            </div>
+            <FloatBar />
             <div className="container mx-auto grid grid-cols-8 gap-5 my-10">
                 <div
                     className={classNames('duration col-span-8 px-5 md:px-0 md:col-span-6', {
