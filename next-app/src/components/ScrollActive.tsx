@@ -3,8 +3,8 @@
  * 需要给内部的元素 data-scroll-active="id"
  */
 
-import React, {useEffect, useRef, useState} from 'react';
-import {ResourceLoader} from './ResourceLoader';
+import React, {useEffect, useRef} from 'react';
+import {cdn} from '~/libs/cdn';
 
 export interface IScrollActiveProps extends IClassName {
     activeClass?: string;
@@ -16,36 +16,28 @@ export const ScrollActive: React.FC<React.PropsWithChildren<IScrollActiveProps>>
     const root = useRef<HTMLDivElement>(null);
     const sa = useRef<any>(null);
 
-    const [ready, setReady] = useState(false);
+    const dispose = () => {
+        sa.current?.dispose?.();
+    };
 
     useEffect(() => {
-        if (!ready) {
-            return;
-        }
-        try {
-            sa.current = new window['ScrollActive']({
+        (async () => {
+            const ScrollActiveLib = await System.import(cdn.ScrollActive).then(n => n.default);
+            dispose();
+            sa.current = new ScrollActiveLib({
                 el: root.current,
                 ...props
             });
-        } catch (ex) {
-            console.log(ex);
-        }
+        })();
 
         return () => {
-            sa.current?.dispose?.();
-            sa.current = null;
+            dispose();
         };
-    }, [props, ready]);
+    });
 
     return (
-        <>
-            <ResourceLoader
-                parallelScripts={['https://cdn.jsdelivr.net/npm/scroll-active@0.0.9/dist/scroll-active.js']}
-                onReady={() => setReady(true)}
-            />
-            <div ref={root} className={props.className}>
-                {props.children}
-            </div>
-        </>
+        <div ref={root} className={props.className}>
+            {props.children}
+        </div>
     );
 };

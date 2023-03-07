@@ -7,6 +7,10 @@ export const useLoad = () => {
     const [loaded, setLoaded] = useState(false);
     useTryLayoutEffect(() => {
         setLoaded(true);
+
+        return () => {
+            setLoaded(false);
+        };
     }, []);
     return loaded;
 };

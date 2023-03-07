@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {ResourceLoader} from './ResourceLoader';
+import React, {useEffect, useRef} from 'react';
+import {cdn} from '~/libs/cdn';
 
 export interface IPhotoSwipeProps {
     gallery: string | Element;
@@ -7,38 +7,31 @@ export interface IPhotoSwipeProps {
 }
 
 export const PhotoSwipe: React.FC<IPhotoSwipeProps> = props => {
-    const [ready, setReady] = useState(false);
     const lightbox = useRef<any>(null);
 
     useEffect(() => {
-        if (!ready) {
-            return;
-        }
+        (async () => {
+            const [PhotoSwipe, PhotoSwipeLightbox] = await Promise.all([
+                //
+                System.import(cdn.PhotoSwipe).then(n => n.default),
+                System.import(cdn.PhotoSwipeLightbox).then(n => n.default)
+            ]);
 
-        const PhotoSwipe = window['PhotoSwipe'];
-        lightbox.current = new window['PhotoSwipeLightbox']({
-            gallery: props.gallery,
-            children: props.childrenSelector,
-            pswpModule: PhotoSwipe
-        });
+            // debugger;
 
-        lightbox.current.init();
+            lightbox.current = new PhotoSwipeLightbox({
+                gallery: props.gallery,
+                children: props.childrenSelector,
+                pswpModule: PhotoSwipe
+            });
+
+            lightbox.current.init();
+        })();
 
         return () => {
             lightbox.current?.destroy();
         };
-    }, [ready, props.gallery, props.childrenSelector]);
+    }, [props.gallery, props.childrenSelector]);
 
-    return (
-        <>
-            <ResourceLoader
-                styles={['https://cdn.jsdelivr.net/npm/photoswipe@5.3.6/dist/photoswipe.css']}
-                parallelScripts={[
-                    'https://cdn.jsdelivr.net/npm/photoswipe@5.3.6/dist/umd/photoswipe.umd.min.js',
-                    'https://cdn.jsdelivr.net/npm/photoswipe@5.3.6/dist/umd/photoswipe-lightbox.umd.min.js'
-                ]}
-                onReady={() => setReady(true)}
-            />
-        </>
-    );
+    return <link rel="stylesheet" href={cdn.PhotoSwipeStyle} />;
 };

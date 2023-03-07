@@ -7,6 +7,8 @@ import App from 'next/app';
 import Head from 'next/head';
 import type {AppType} from 'next/app';
 
+import 'systemjs';
+
 import {Provider} from 'react-redux';
 import NextNProgress from 'nextjs-progressbar';
 
