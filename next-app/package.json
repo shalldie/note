@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "report": "ANALYZE=true npm run build",
     "start": "next start",
     "lint": "next lint"
   },

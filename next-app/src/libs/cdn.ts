@@ -1,4 +1,6 @@
 export const cdn = {
+    FontAwesome: 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3.0/css/all.min.css',
+
     Vue: 'https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.min.js',
     VueGitComment: 'https://cdn.jsdelivr.net/npm/vue-git-comment@0.1.0/dist/vue-git-comment.umd.js',
 

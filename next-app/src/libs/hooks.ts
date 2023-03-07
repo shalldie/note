@@ -8,9 +8,9 @@ export const useLoad = () => {
     useTryLayoutEffect(() => {
         setLoaded(true);
 
-        return () => {
-            setLoaded(false);
-        };
+        // return () => {
+        //     setLoaded(false);
+        // };
     }, []);
     return loaded;
 };
