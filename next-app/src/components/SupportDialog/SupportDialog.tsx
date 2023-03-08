@@ -32,10 +32,10 @@ export const SupportDialog: React.FC<ISupportDialogProps> = props => {
                     <p>你会帮助一位善良的程序员改善生活 &gt;_&lt;#@!</p>
                     <div className="grid grid-cols-2 gap-3">
                         <div className="col-span-1 h-[300px]">
-                            <img src={qrCodes[0]} alt="支付宝" className="w-full h-full shadow-2xl" />
+                            <img src={qrCodes[0]} alt="支付宝" className="w-full h-full shadow-card" />
                         </div>
                         <div className="col-span-1">
-                            <img src={qrCodes[1]} alt="微信" className="w-full h-full shadow-2xl" />
+                            <img src={qrCodes[1]} alt="微信" className="w-full h-full shadow-card" />
                         </div>
                     </div>
                 </div>

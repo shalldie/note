@@ -1,5 +1,7 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import {cdn} from '~/libs/cdn';
 import {RemoteComponent} from '../RemoteComponent';
 
@@ -11,11 +13,11 @@ interface ICodeComponentProps extends React.PropsWithChildren<IClassName> {
 const CodeLoading: React.FC<React.PropsWithChildren<IClassName>> = props => {
     return (
         <pre
-            className={props.className}
+            className={classNames(props.className)}
             style={{
                 background: 'rgb(30, 30, 30)',
                 margin: '0.5em 0px',
-                padding: '1em',
+                padding: '1em 1em 1em 3.2em',
                 color: 'rgb(212, 212, 212)',
                 fontSize: '13px',
                 lineHeight: '1.5'
@@ -32,7 +34,7 @@ export const CodeComponent: React.FC<ICodeComponentProps> = ({node: _, inline, c
     // 行内 code，或者没标注语言
     if (inline || !match) {
         return (
-            <code className={className} {...props}>
+            <code className={classNames(className, {'text-green-600': inline})} {...props}>
                 {children}
             </code>
         );
@@ -55,7 +57,7 @@ export const CodeComponent: React.FC<ICodeComponentProps> = ({node: _, inline, c
             loading={() => <CodeLoading>{children}</CodeLoading>}
             cprops={{
                 children: String(children).replace(/\n$/, ''),
-                language: match?.[1],
+                language: match?.[1]?.toLowerCase(),
                 PreTag: ({...props}) => <pre className="syntax-pre" {...props}></pre>,
                 showLineNumbers: true,
                 ...props

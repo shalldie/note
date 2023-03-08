@@ -8,7 +8,6 @@ import {Markdown} from '~/components/Markdown';
 import {handlePageDispatchProps} from '~/libs/utils';
 import {GitComment} from '~/components/GitComment';
 import {useRouter} from 'next/router';
-import {ArticleIndex} from '~/components/Sidebar/ArticleIndex';
 
 const useCover = () => {
     const detail = useAppSelector(n => n.article.detail!);
@@ -37,7 +36,7 @@ const ArticleDetail: NextPage = props => {
         <Layout.Column cover={cover}>
             <main className="page-article-detail">
                 <Markdown content={detail.content} className={ARTICLE_MD_CLS} />
-                <GitComment uuid={`/article/${router.query.name}`} className="mt-5" />
+                <GitComment key={router.query.name as string} uuid={`/article/${router.query.name}`} className="mt-5" />
             </main>
         </Layout.Column>
     );

@@ -16,7 +16,7 @@ export const ArticleItemCard: React.FC<IArticleListItem & IClassName> = props =>
         <div
             className={classNames(
                 props.className,
-                'article-item-card group rounded no-underline overflow-hidden duration text-center color bg-[var(--color-gray)] hover:shadow-2xl'
+                'article-item-card group rounded no-underline overflow-hidden duration text-center color bg-[var(--color-gray)] hover:shadow-card'
             )}
         >
             <Link className="block pb-[60%] relative overflow-hidden" href={`/article/${props.name}`}>
@@ -56,7 +56,7 @@ export const ArticleItemCard: React.FC<IArticleListItem & IClassName> = props =>
 export const ArticleCoverCard: React.FC<IArticleListItem> = props => {
     return (
         <Link
-            className="article-cover-card group rounded no-underline overflow-hidden duration text-center color hover:shadow-2xl hover:bg-[var(--color-gray)]"
+            className="article-cover-card group rounded no-underline overflow-hidden duration text-center color hover:shadow-card hover:bg-[var(--color-gray)]"
             href={`/article/${props.name}`}
         >
             <div className="pb-[80%] relative overflow-hidden">

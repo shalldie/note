@@ -49,6 +49,10 @@
         transition-duration: var(--transition);
     }
 
+    .shadow-card {
+        box-shadow: 15px 25px 50px -12px rgb(0 0 0 / 0.25);
+    }
+
     .link {
         @apply text-blue-500 no-underline;
         @apply hover:text-opacity-80 hover:underline;

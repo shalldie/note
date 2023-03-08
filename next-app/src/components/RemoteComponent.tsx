@@ -38,7 +38,7 @@ export interface IRemoteComponentProps {
 export const RemoteComponent: React.FC<IRemoteComponentProps> = props => {
     const loader = () =>
         System.import<any>(props.url).then(async n => {
-            await sleep(30000);
+            // await sleep(3000);
             return n;
         });
 
