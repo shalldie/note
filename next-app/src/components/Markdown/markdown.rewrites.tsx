@@ -84,4 +84,7 @@ export const markdownRewrites: TRewriteHandler = {
 
         return <pre>{props.children}</pre>;
     }
+    // p: ({node: _, ...props}) => {
+    //     return <div>{props.children}</div>;
+    // }
 };

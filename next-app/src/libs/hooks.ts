@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import {isServer} from './utils';
 
 export const useTryLayoutEffect = !isServer ? useLayoutEffect : useEffect;

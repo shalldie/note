@@ -9,5 +9,8 @@ export const cdn = {
 
     PhotoSwipe: 'https://cdn.jsdelivr.net/npm/photoswipe@5.3.6/dist/umd/photoswipe.umd.min.js',
     PhotoSwipeLightbox: 'https://cdn.jsdelivr.net/npm/photoswipe@5.3.6/dist/umd/photoswipe-lightbox.umd.min.js',
-    PhotoSwipeStyle: 'https://cdn.jsdelivr.net/npm/photoswipe@5.3.6/dist/photoswipe.css'
+    PhotoSwipeStyle: 'https://cdn.jsdelivr.net/npm/photoswipe@5.3.6/dist/photoswipe.css',
+
+    ReactSyntaxHighlighter:
+        'https://cdn.jsdelivr.net/npm/@nosaid/externals@0.0.5/dist/react-syntax-highlighter.umd.min.js'
 };

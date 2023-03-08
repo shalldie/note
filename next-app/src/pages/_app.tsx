@@ -2,12 +2,14 @@ import 'normalize.css';
 import '~/assets/styles/main.css';
 import '~/assets/styles/main.scss';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import type {AppType} from 'next/app';
 
 import 'systemjs';
+// import 'systemjs/dist/extras/amd';
+// import 'systemjs/dist/extras/named-exports';
 
 import {Provider} from 'react-redux';
 import NextNProgress from 'nextjs-progressbar';
@@ -39,6 +41,10 @@ const AppHeadMeta: React.FC = () => {
 
 const BlogApp: AppType<{error?: any}> = ({Component, pageProps}) => {
     const store = wrapper.useStore();
+
+    useEffect(() => {
+        window['React'] = React;
+    }, []);
 
     if (pageProps.error) {
         return <PageError {...pageProps.error} />;
