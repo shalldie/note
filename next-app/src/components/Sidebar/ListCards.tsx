@@ -1,8 +1,8 @@
-import React, {useCallback, useMemo} from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Link from 'next/link';
 
-import {IArticleListItem, useAppSelector} from '~/store';
-import {LabelBox} from '../LabelBox';
+import { IArticleListItem, useAppSelector } from '~/store';
+import { LabelBox } from '../LabelBox';
 import classNames from 'classnames';
 
 interface ICardItemProps {
@@ -22,7 +22,7 @@ const CardBox: React.FC<React.PropsWithChildren<ICardItemProps>> = props => {
     );
 };
 
-const ListBox: React.FC<{list: {title: string; link: string; target?: string}[]}> = props => {
+const ListBox: React.FC<{ list: { title: string; link: string; target?: string }[] }> = props => {
     return (
         <div>
             {props.list.map((item, index) => (
@@ -32,7 +32,7 @@ const ListBox: React.FC<{list: {title: string; link: string; target?: string}[]}
                     key={index}
                     className={classNames(
                         'block link leading-10 px-5 duration border border-solid border-t-0 border-[#eee] hover:shadow-xl hover:bg-[#efefef]',
-                        {'rounded-b': index === props.list.length - 1}
+                        { 'rounded-b': index === props.list.length - 1 }
                     )}
                 >
                     {item.title}
@@ -61,7 +61,7 @@ export const ListCards: React.FC = () => {
 
     // 友情链接
     const friendLinks = useAppSelector(n => n.global.friendLinks);
-    const friend = useMemo(() => friendLinks.map(n => ({...n, target: '_blank'})), [friendLinks]);
+    const friend = useMemo(() => friendLinks.map(n => ({ ...n, target: '_blank' })), [friendLinks]);
 
     return (
         <div className="list-cards">

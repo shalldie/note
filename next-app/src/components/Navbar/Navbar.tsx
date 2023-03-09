@@ -2,10 +2,10 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import {MobileBar} from './MobileBar';
-import {PCBar} from './PCBar';
+import { MobileBar } from './MobileBar';
+import { PCBar } from './PCBar';
 
-export const Navbar: React.FC<{light?: boolean}> = props => {
+export const Navbar: React.FC<{ light?: boolean }> = props => {
     return (
         <nav className="relative z-10">
             <PCBar className={classNames('hidden md:block')} light={!!props.light} />

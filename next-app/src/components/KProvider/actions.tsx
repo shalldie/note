@@ -1,12 +1,12 @@
-import React, {useMemo} from 'react';
-import {useRouter} from 'next/router';
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 
-import {Action, createAction, useRegisterActions} from 'kbar';
+import { Action, createAction, useRegisterActions } from 'kbar';
 
-import {useAppSelector} from '~/store';
+import { useAppSelector } from '~/store';
 
-export const ActionIcon: React.FC<{className?: string}> = props => {
-    return <i className={props.className} style={{width: '20px'}}></i>;
+export const ActionIcon: React.FC<{ className?: string }> = props => {
+    return <i className={props.className} style={{ width: '20px' }}></i>;
 };
 
 export const useNavActions = () => {

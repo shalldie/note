@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import {useRouter} from 'next/router';
-import React, {useEffect, useState} from 'react';
-import {ARTICLE_MD_CLS} from '~/store';
-import {ScrollActive} from '../ScrollActive';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { ARTICLE_MD_CLS } from '~/store';
+import { ScrollActive } from '../ScrollActive';
 
 import styles from './styles.module.scss';
 
@@ -13,7 +13,7 @@ export interface IArticleIndexProps {
 const useTitles = () => {
     const router = useRouter();
 
-    const [titles, setTitles] = useState<{name: string; cls: string}[]>([]);
+    const [titles, setTitles] = useState<{ name: string; cls: string }[]>([]);
 
     useEffect(() => {
         const articleMD = document.querySelector('.' + ARTICLE_MD_CLS);

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {SupportDialog} from '../SupportDialog';
+import React, { useState } from 'react';
+import { SupportDialog } from '../SupportDialog';
 
 export const Cardwrap: React.FC = () => {
     const [dialogOpen, setDialog] = useState(false);

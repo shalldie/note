@@ -1,6 +1,6 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import {cdn} from '~/libs/cdn';
+import { cdn } from '~/libs/cdn';
 
 export interface IGitCommentProps extends IClassName {
     uuid: string;

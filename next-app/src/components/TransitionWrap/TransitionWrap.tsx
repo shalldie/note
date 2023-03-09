@@ -1,5 +1,5 @@
-import React, {useMemo} from 'react';
-import {CSSTransition} from 'react-transition-group';
+import React, { useMemo } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import styles from './TransitionWrap.module.scss';
 
 const FadeClassName = {

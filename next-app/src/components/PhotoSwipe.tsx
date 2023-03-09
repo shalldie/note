@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react';
-import {cdn} from '~/libs/cdn';
+import React, { useEffect, useRef } from 'react';
+import { cdn } from '~/libs/cdn';
 
 export interface IPhotoSwipeProps {
     gallery: string | Element;

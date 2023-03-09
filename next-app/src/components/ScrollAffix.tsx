@@ -1,6 +1,6 @@
-import React, {useEffect, useRef} from 'react';
-import {cdn} from '~/libs/cdn';
-import {useParentSize} from '~/libs/hooks';
+import React, { useEffect, useRef } from 'react';
+import { cdn } from '~/libs/cdn';
+import { useParentSize } from '~/libs/hooks';
 
 export interface IScrollAffixProps extends IClassName {
     enable?: boolean;
@@ -23,7 +23,7 @@ export const ScrollAffix: React.FC<React.PropsWithChildren<IScrollAffixProps>> =
         } catch {}
     };
 
-    const {width} = useParentSize(root);
+    const { width } = useParentSize(root);
 
     useEffect(() => {
         (async () => {
@@ -46,7 +46,7 @@ export const ScrollAffix: React.FC<React.PropsWithChildren<IScrollAffixProps>> =
     }
 
     return (
-        <div ref={root} className={props.className} style={{width: width + 'px'}}>
+        <div ref={root} className={props.className} style={{ width: width + 'px' }}>
             {props.children}
         </div>
     );

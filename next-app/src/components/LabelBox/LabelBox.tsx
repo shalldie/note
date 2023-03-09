@@ -1,17 +1,17 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 import classNames from 'classnames';
-import {When} from 'react-if';
+import { When } from 'react-if';
 
-import {useLoad} from '~/libs/hooks';
-import {RndColor} from '~/libs/utils';
-import {useAppSelector} from '~/store';
+import { useLoad } from '~/libs/hooks';
+import { RndColor } from '~/libs/utils';
+import { useAppSelector } from '~/store';
 
 import styles from './LabelBox.module.scss';
 
-export const LabelBox: React.FC<{className?: string}> = props => {
+export const LabelBox: React.FC<{ className?: string }> = props => {
     const router = useRouter();
     const loaded = useLoad();
     const labels = useAppSelector(n => n.article.labels);
@@ -51,7 +51,7 @@ export const LabelBox: React.FC<{className?: string}> = props => {
                 <Link
                     href={`/article?label=${label.name}`}
                     className="label"
-                    style={{backgroundColor: label.bgColor}}
+                    style={{ backgroundColor: label.bgColor }}
                     key={index}
                 >
                     {label.content}

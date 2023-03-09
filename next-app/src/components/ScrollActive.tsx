@@ -3,8 +3,8 @@
  * 需要给内部的元素 data-scroll-active="id"
  */
 
-import React, {useEffect, useRef} from 'react';
-import {cdn} from '~/libs/cdn';
+import React, { useEffect, useRef } from 'react';
+import { cdn } from '~/libs/cdn';
 
 export interface IScrollActiveProps extends IClassName {
     activeClass?: string;

@@ -1,13 +1,13 @@
-import {NextPage} from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
 
-import {useAppSelector, wrapper} from '~/store';
-import {Layout} from '~/components/layouts';
+import { useAppSelector, wrapper } from '~/store';
+import { Layout } from '~/components/layouts';
 import classNames from 'classnames';
 
 const PageAbout: NextPage = props => {
     wrapper.useHydration(props);
-    const {avatar, description, sidebar} = useAppSelector(n => n.global);
+    const { avatar, description, sidebar } = useAppSelector(n => n.global);
     // const avatar = '';
     // const description = [];
     // const description = useAppSelector
@@ -18,7 +18,9 @@ const PageAbout: NextPage = props => {
                 <title>关于</title>
             </Head>
             <main
-                className={classNames('page-about py-8 pb-12 duration', {'text-center pt-8 shadow-xl': !sidebar.show})}
+                className={classNames('page-about py-8 pb-12 duration', {
+                    'text-center pt-8 shadow-xl': !sidebar.show
+                })}
             >
                 <h1>关于博客</h1>
                 {description.map((content, index) => (
@@ -27,7 +29,7 @@ const PageAbout: NextPage = props => {
                 {/* <p v-for="(content, index) in description" :key="index">{{ content }}</p> */}
                 <h1>关于我</h1>
                 <p>
-                    <img src={avatar} alt="头像" style={{maxWidth: '200px'}} />
+                    <img src={avatar} alt="头像" style={{ maxWidth: '200px' }} />
                 </p>
                 <p>xieshuang</p>
                 <h4>单位：</h4>

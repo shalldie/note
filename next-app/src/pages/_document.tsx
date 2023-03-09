@@ -1,5 +1,5 @@
-import {Html, Head, Main, NextScript} from 'next/document';
-import {cdn} from '~/libs/cdn';
+import { Html, Head, Main, NextScript } from 'next/document';
+import { cdn } from '~/libs/cdn';
 
 export default function Document() {
     return (

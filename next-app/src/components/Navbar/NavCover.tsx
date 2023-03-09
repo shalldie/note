@@ -22,13 +22,13 @@ export const NavCover: React.FC<INavCover> = props => {
         >
             <div
                 className="py-7 px-12 rounded bg-white bg-opacity-40 sahdow-lg"
-                style={{boxShadow: '0 0 16px hsl(0deg 0% 100% / 40%)'}}
+                style={{ boxShadow: '0 0 16px hsl(0deg 0% 100% / 40%)' }}
                 // style={{backgroundImage: `url(${Shadow.src})`, backgroundSize: '100% 100%'}}
             >
                 {props.content?.map((line, index) => (
                     <div
                         className="text-lg text-white text-center"
-                        style={{textShadow: '2px 2px 2px var(--color)'}}
+                        style={{ textShadow: '2px 2px 2px var(--color)' }}
                         // dangerouslySetInnerHTML={{__html: line}}
                         key={index}
                     >

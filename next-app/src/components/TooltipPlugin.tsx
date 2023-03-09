@@ -9,9 +9,9 @@ const ClientTooltip = dynamic(
             /* webpackChunkName: "react-tooltip" */
             'react-tooltip'
         ).then(n => n.Tooltip),
-    {ssr: false}
+    { ssr: false }
 );
 
 export const TooltipPlugin: React.FC = () => {
-    return <ClientTooltip anchorSelect=".tooltip" style={{zIndex: 999}} />;
+    return <ClientTooltip anchorSelect=".tooltip" style={{ zIndex: 999 }} />;
 };

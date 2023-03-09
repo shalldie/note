@@ -1,12 +1,12 @@
-import {NextPage} from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
 
-import {http} from '~/libs/http';
-import {wrapper} from '~/store';
-import {Markdown} from '~/components/Markdown';
-import {Layout} from '~/components/layouts';
+import { http } from '~/libs/http';
+import { wrapper } from '~/store';
+import { Markdown } from '~/components/Markdown';
+import { Layout } from '~/components/layouts';
 
-const PageLog: NextPage<{markdown: string}> = ({markdown, ...props}) => {
+const PageLog: NextPage<{ markdown: string }> = ({ markdown, ...props }) => {
     wrapper.useHydration(props);
     return (
         <Layout.Column>
@@ -22,7 +22,7 @@ const PageLog: NextPage<{markdown: string}> = ({markdown, ...props}) => {
 
 PageLog.getInitialProps = async ctx => {
     const markdown = await http.get<string>(`/log/${ctx.query.name}`);
-    return {markdown};
+    return { markdown };
 };
 
 export default PageLog;

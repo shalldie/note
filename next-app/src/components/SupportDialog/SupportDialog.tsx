@@ -1,6 +1,6 @@
 import React from 'react';
-import {createPortal} from 'react-dom';
-import {TransitionWrap} from '../TransitionWrap';
+import { createPortal } from 'react-dom';
+import { TransitionWrap } from '../TransitionWrap';
 
 export interface ISupportDialogProps {
     open: boolean;

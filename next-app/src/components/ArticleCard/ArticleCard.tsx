@@ -4,7 +4,7 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 
-import {IArticleListItem} from '~/store';
+import { IArticleListItem } from '~/store';
 
 export class ArticleCardProps {
     article!: IArticleListItem;
@@ -39,7 +39,7 @@ export const ArticleItemCard: React.FC<IArticleListItem & IClassName> = props =>
                     <Link
                         href={`/article?label=${lbl}`}
                         key={index}
-                        style={{textShadow: '3px 3px 3px var(--color)'}}
+                        style={{ textShadow: '3px 3px 3px var(--color)' }}
                         className="inline-block rounded duration no-underline text-white bg-[var(--color)] font-bold text-[12px] mx-1 py-[3px] px-[10px] hover:bg-[var(--color-red)] hover:shadow-2xl"
                     >
                         {lbl}

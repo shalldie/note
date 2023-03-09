@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import React, {useState} from 'react';
-import {useLocalStorage} from '~/libs/hooks';
-import {useAppDispatch, useAppSelector} from '~/store';
-import {globalActions} from '~/store/global';
-import {SupportDialog} from '../SupportDialog';
+import React, { useCallback, useState } from 'react';
+import { useLocalStorage } from '~/libs/hooks';
+import { useAppDispatch, useAppSelector } from '~/store';
+import { globalActions } from '~/store/global';
+import { SupportDialog } from '../SupportDialog';
 import styles from './FloatBar.module.scss';
 
 export const FloatBar: React.FC = () => {
@@ -22,15 +22,22 @@ export const FloatBar: React.FC = () => {
         );
     };
 
+    const scroll2Top = useCallback(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, []);
+
     const [dialogOpen, setDialog] = useState(false);
 
     return (
-        <div className={classNames(styles.floatbar, 'hidden md:block', {[styles.open]: open})}>
+        <div className={classNames(styles.floatbar, 'hidden md:block', { [styles.open]: open })}>
             <SupportDialog open={dialogOpen} onClose={() => setDialog(false)} />
             <div className="bar ctl-pie" onClick={() => setOpen(!open)}>
                 <i className="fa-solid fa-ellipsis"></i>
             </div>
-            <div className="bar bar-item up tooltip" data-tooltip-content="回到顶部">
+            <div onClick={scroll2Top} className="bar bar-item up tooltip" data-tooltip-content="回到顶部">
                 <i className="fa-solid fa-angle-up"></i>
             </div>
             <div

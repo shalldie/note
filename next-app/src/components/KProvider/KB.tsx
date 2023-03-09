@@ -1,9 +1,9 @@
 import React from 'react';
-import {useKBar} from 'kbar';
+import { useKBar } from 'kbar';
 import classNames from 'classnames';
 
 export const KB: React.FC<IClassName> = props => {
-    const {query} = useKBar();
+    const { query } = useKBar();
 
     return (
         <span

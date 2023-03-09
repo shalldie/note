@@ -6,5 +6,5 @@ export const FloatBar = dynamic(
             /* webpackChunkName: "float-bar" */
             './FloatBar'
         ).then(n => n.FloatBar),
-    {ssr: false}
+    { ssr: false }
 );

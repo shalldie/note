@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import {useAppSelector} from '~/store';
+import { useAppSelector } from '~/store';
 
 // import styles from './Footer.module.scss';
 
@@ -68,11 +68,11 @@ export const Footer: React.FC = () => {
                                 <a
                                     href="https://github.com/shalldie"
                                     target="_blank"
-                                    style={{textDecoration: 'none'}}
+                                    style={{ textDecoration: 'none' }}
                                     rel="noreferrer"
                                     className="no-underline text-[#bec4ce] duration hover:text-white hover:underline"
                                 >
-                                    <i style={{fontSize: '60px'}} className="fa-brands fa-github"></i>
+                                    <i style={{ fontSize: '60px' }} className="fa-brands fa-github"></i>
                                 </a>
                             </li>
                         </ul>

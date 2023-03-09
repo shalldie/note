@@ -2,8 +2,8 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import {cdn} from '~/libs/cdn';
-import {RemoteComponent} from '../RemoteComponent';
+import { cdn } from '~/libs/cdn';
+import { RemoteComponent } from '../RemoteComponent';
 
 interface ICodeComponentProps extends React.PropsWithChildren<IClassName> {
     node: any;
@@ -28,26 +28,17 @@ const CodeLoading: React.FC<React.PropsWithChildren<IClassName>> = props => {
     );
 };
 
-export const CodeComponent: React.FC<ICodeComponentProps> = ({node: _, inline, className, children, ...props}) => {
+export const CodeComponent: React.FC<ICodeComponentProps> = ({ node: _, inline, className, children, ...props }) => {
     const match = /language-(\w+)/.exec(className || ''); // 是否标注了语言
 
     // 行内 code，或者没标注语言
     if (inline || !match) {
         return (
-            <code className={classNames(className, {'text-green-600': inline})} {...props}>
+            <code className={classNames(className, { 'text-green-700': inline })} {...props}>
                 {children}
             </code>
         );
     }
-
-    // 服务端
-    // if (!loaded) {
-    //     return (
-    //         <CodeLoading className={className} {...props}>
-    //             {children}
-    //         </CodeLoading>
-    //     );
-    // }
 
     // 客户端、标注了语言、非行内的 code，才需要染色高亮
     // 服务端会使用 loading
@@ -58,7 +49,7 @@ export const CodeComponent: React.FC<ICodeComponentProps> = ({node: _, inline, c
             cprops={{
                 children: String(children).replace(/\n$/, ''),
                 language: match?.[1]?.toLowerCase(),
-                PreTag: ({...props}) => <pre className="syntax-pre" {...props}></pre>,
+                PreTag: ({ ...props }) => <pre className="syntax-pre" {...props}></pre>,
                 showLineNumbers: true,
                 ...props
             }}

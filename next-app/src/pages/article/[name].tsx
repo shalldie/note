@@ -1,13 +1,13 @@
-import {NextPage} from 'next';
+import { NextPage } from 'next';
 
 import dayjs from 'dayjs';
 
-import {cover, Layout} from '~/components/layouts';
-import {articleActions, ARTICLE_MD_CLS, useAppSelector, wrapper} from '~/store';
-import {Markdown} from '~/components/Markdown';
-import {handlePageDispatchProps} from '~/libs/utils';
-import {GitComment} from '~/components/GitComment';
-import {useRouter} from 'next/router';
+import { cover, Layout } from '~/components/layouts';
+import { articleActions, ARTICLE_MD_CLS, useAppSelector, wrapper } from '~/store';
+import { Markdown } from '~/components/Markdown';
+import { handlePageDispatchProps } from '~/libs/utils';
+import { GitComment } from '~/components/GitComment';
+import { useRouter } from 'next/router';
 
 const useCover = () => {
     const detail = useAppSelector(n => n.article.detail!);

@@ -1,6 +1,6 @@
 import Script from 'next/script';
-import React, {useEffect, useState} from 'react';
-import {When} from 'react-if';
+import React, { useEffect, useState } from 'react';
+import { When } from 'react-if';
 
 export interface IResourceLoaderProps {
     styles?: string[];

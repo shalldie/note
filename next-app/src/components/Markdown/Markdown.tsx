@@ -1,6 +1,6 @@
 import 'github-markdown-css';
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -8,9 +8,9 @@ import remarkGfm from 'remark-gfm';
 import classNames from 'classnames';
 
 import styles from './Markdown.module.scss';
-import {markdownRewrites} from './markdown.rewrites';
+import { markdownRewrites } from './Markdown.component-rewrites';
 
-import {PhotoSwipe} from '../PhotoSwipe';
+import { PhotoSwipe } from '../PhotoSwipe';
 
 export interface IMarkdownProps extends IClassName {
     content: string;

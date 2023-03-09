@@ -1,5 +1,5 @@
-import {useCallback, useEffect, useLayoutEffect, useState} from 'react';
-import {isServer} from './utils';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { isServer } from './utils';
 
 export const useTryLayoutEffect = !isServer ? useLayoutEffect : useEffect;
 
@@ -16,7 +16,7 @@ export const useLoad = () => {
 };
 
 export const useParentSize = (cur: React.RefObject<HTMLElement>) => {
-    const [state, setState] = useState({width: 0, height: 0});
+    const [state, setState] = useState({ width: 0, height: 0 });
 
     const handler = useCallback(() => {
         setState({

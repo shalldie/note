@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import {ArticleCoverCard} from '~/components/ArticleCard';
-import {cover, Layout} from '~/components/layouts';
-import {useAppSelector, wrapper} from '~/store';
+import { ArticleCoverCard } from '~/components/ArticleCard';
+import { cover, Layout } from '~/components/layouts';
+import { useAppSelector, wrapper } from '~/store';
 
 export default function Home(props: any) {
     wrapper.useHydration(props);

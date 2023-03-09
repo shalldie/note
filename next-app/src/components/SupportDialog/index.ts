@@ -6,5 +6,5 @@ export const SupportDialog = dynamic(
             /* webpackChunkName: "support-dialog" */
             './SupportDialog'
         ).then(n => n.SupportDialog),
-    {ssr: false}
+    { ssr: false }
 );

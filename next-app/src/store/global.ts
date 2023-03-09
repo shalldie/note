@@ -2,10 +2,10 @@
  * 全局相关
  */
 
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import {articleActions} from './article';
-import {TRootState} from '.';
+import { articleActions } from './article';
+import { TRootState } from '.';
 
 export class GlobalState {
     serverInitialized = false;
@@ -99,7 +99,7 @@ export class GlobalState {
 
 export const globalSlice = createSlice({
     name: 'global',
-    initialState: () => ({...new GlobalState()}),
+    initialState: () => ({ ...new GlobalState() }),
     reducers: {
         assignState(state, action: PayloadAction<Partial<GlobalState>>) {
             Object.assign(state, action.payload);
@@ -114,7 +114,7 @@ export const globalActions = {
         if (initialized) {
             return;
         }
-        thunk.dispatch(globalActions.assignState({serverInitialized: true}));
+        thunk.dispatch(globalActions.assignState({ serverInitialized: true }));
 
         await Promise.all([
             //

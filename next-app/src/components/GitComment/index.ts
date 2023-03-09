@@ -8,5 +8,5 @@ export const GitComment = dynamic(
             /* webpackChunkName: "git-comment" */
             './GitComment'
         ).then(n => n.GitComment),
-    {ssr: false}
+    { ssr: false }
 );

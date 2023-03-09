@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
-import {sleep} from '~/libs/utils';
 
 /**
  * 远程组件参数

@@ -1,10 +1,10 @@
-import {NextPage} from 'next';
+import { NextPage } from 'next';
 
-import {articleActions, useAppSelector, wrapper} from '~/store';
-import {handlePageDispatchProps} from '~/libs/utils';
-import {cover, Layout} from '~/components/layouts';
-import {LabelBox} from '~/components/LabelBox';
-import {ArticleItemCard} from '~/components/ArticleCard';
+import { articleActions, useAppSelector, wrapper } from '~/store';
+import { handlePageDispatchProps } from '~/libs/utils';
+import { cover, Layout } from '~/components/layouts';
+import { LabelBox } from '~/components/LabelBox';
+import { ArticleItemCard } from '~/components/ArticleCard';
 
 const ArticleList: NextPage = props => {
     wrapper.useHydration(props);
@@ -25,7 +25,7 @@ const ArticleList: NextPage = props => {
 };
 
 ArticleList.getInitialProps = wrapper.getInitialPageProps(store => async ctx => {
-    const result = await store.dispatch(articleActions.fetchArticleList({label: ctx.query.label}) as any);
+    const result = await store.dispatch(articleActions.fetchArticleList({ label: ctx.query.label }) as any);
     return handlePageDispatchProps(result, ctx);
 });
 

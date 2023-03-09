@@ -2,23 +2,23 @@ import 'normalize.css';
 import '~/assets/styles/main.css';
 import '~/assets/styles/main.scss';
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import App from 'next/app';
 import Head from 'next/head';
-import type {AppType} from 'next/app';
+import type { AppType } from 'next/app';
 
 import 'systemjs';
 // import 'systemjs/dist/extras/amd';
 // import 'systemjs/dist/extras/named-exports';
 
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import NextNProgress from 'nextjs-progressbar';
 
-import {wrapper} from '~/store';
+import { wrapper } from '~/store';
 import PageError from './_error';
-import {globalActions} from '~/store/global';
-import {TooltipPlugin} from '~/components/TooltipPlugin';
-import {KProvider} from '~/components/KProvider';
+import { globalActions } from '~/store/global';
+import { TooltipPlugin } from '~/components/TooltipPlugin';
+import { KProvider } from '~/components/KProvider';
 
 const AppHeadMeta: React.FC = () => {
     return (
@@ -39,7 +39,7 @@ const AppHeadMeta: React.FC = () => {
     );
 };
 
-const BlogApp: AppType<{error?: any}> = ({Component, pageProps}) => {
+const BlogApp: AppType<{ error?: any }> = ({ Component, pageProps }) => {
     const store = wrapper.useStore();
 
     useEffect(() => {

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {useKBar, VisualState} from 'kbar';
+import { useKBar, VisualState } from 'kbar';
 
 export const KBAR_LISTBOX = 'kbar-listbox';
 export const getListboxItemId = (id: number) => `kbar-listbox-item-${id}`;
@@ -10,7 +10,7 @@ export function KSearch(
         defaultPlaceholder?: string;
     }
 ) {
-    const {query, searchQuery, actions, currentRootActionId, activeIndex, showing, options} = useKBar(state => ({
+    const { query, searchQuery, actions, currentRootActionId, activeIndex, showing, options } = useKBar(state => ({
         searchQuery: state.searchQuery,
         currentRootActionId: state.currentRootActionId,
         actions: state.actions,
@@ -19,7 +19,7 @@ export function KSearch(
     }));
     const [search, setSearch] = useState(searchQuery);
 
-    const {defaultPlaceholder, ...rest} = props;
+    const { defaultPlaceholder, ...rest } = props;
 
     React.useEffect(() => {
         query.setSearch('');

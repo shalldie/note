@@ -2,13 +2,13 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import {Sidebar} from '../Sidebar';
-import {ILayoutDefaultProps, LayoutDefault} from './default';
-import {useAppSelector} from '~/store';
-import {TransitionWrap} from '../TransitionWrap';
-import {FloatBar} from '../FloatBar';
+import { Sidebar } from '../Sidebar';
+import { ILayoutDefaultProps, LayoutDefault } from './default';
+import { useAppSelector } from '~/store';
+import { TransitionWrap } from '../TransitionWrap';
+import { FloatBar } from '../FloatBar';
 
-export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({children, className, ...props}) => {
+export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({ children, className, ...props }) => {
     const sidebar = useAppSelector(n => n.global.sidebar);
 
     return (

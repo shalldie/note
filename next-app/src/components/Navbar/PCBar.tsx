@@ -1,13 +1,13 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 
-import {useAppSelector} from '~/store';
-import {When} from 'react-if';
+import { useAppSelector } from '~/store';
+import { When } from 'react-if';
 import classNames from 'classnames';
 
-import {DynamicComponent} from '../DynamicComponent';
-import {sleep} from '~/libs/utils';
-import {KB} from '../KProvider';
+import { DynamicComponent } from '../DynamicComponent';
+import { sleep } from '~/libs/utils';
+import { KB } from '../KProvider';
 
 import styles from './Navbar.module.scss';
 
@@ -26,11 +26,11 @@ const useMenu = () => {
     };
 };
 
-export const PCBar: React.FC<IClassName & {light: boolean}> = props => {
+export const PCBar: React.FC<IClassName & { light: boolean }> = props => {
     const bar = useAppSelector(n => n.global.navbar);
     const menu = useMenu();
 
-    const cls = classNames(styles.pcbar, props.className, {[styles.light]: props.light});
+    const cls = classNames(styles.pcbar, props.className, { [styles.light]: props.light });
 
     return (
         <div className={cls}>
