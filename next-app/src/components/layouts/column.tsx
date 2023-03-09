@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import classNames from 'classnames';
 
@@ -10,6 +11,7 @@ import { FloatBar } from '../FloatBar';
 
 export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({ children, className, ...props }) => {
     const sidebar = useAppSelector(n => n.global.sidebar);
+    const router = useRouter();
 
     return (
         <LayoutDefault className={classNames('layout-column', className)} {...props}>
@@ -24,7 +26,7 @@ export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({ children, classNam
                 </div>
                 <TransitionWrap in={sidebar.show}>
                     <div className="col-span-2 md:block duration">
-                        <Sidebar />
+                        <Sidebar key={router.asPath} />
                     </div>
                 </TransitionWrap>
             </div>
