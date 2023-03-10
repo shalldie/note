@@ -13,10 +13,7 @@ const PageAbout: NextPage = props => {
     // const description = useAppSelector
 
     return (
-        <Layout.Column>
-            <Head>
-                <title>关于</title>
-            </Head>
+        <Layout.Column title="关于">
             <main
                 className={classNames('page-about py-8 pb-12 duration', {
                     'text-center pt-8 shadow-xl': !sidebar.show

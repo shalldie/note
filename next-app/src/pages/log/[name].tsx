@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import Head from 'next/head';
 
 import { http } from '~/libs/http';
 import { wrapper } from '~/store';
@@ -9,10 +8,7 @@ import { Layout } from '~/components/layouts';
 const PageLog: NextPage<{ markdown: string }> = ({ markdown, ...props }) => {
     wrapper.useHydration(props);
     return (
-        <Layout.Column>
-            <Head>
-                <title>日志</title>
-            </Head>
+        <Layout.Column title="日志">
             <main className="page-log">
                 <Markdown content={markdown} />
             </main>

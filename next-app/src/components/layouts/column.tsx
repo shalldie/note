@@ -25,7 +25,7 @@ export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({ children, classNam
                     {children}
                 </div>
                 <TransitionWrap in={sidebar.show}>
-                    <div className="col-span-2 md:block duration">
+                    <div className="col-span-2 hidden md:block duration">
                         <Sidebar key={router.asPath} />
                     </div>
                 </TransitionWrap>

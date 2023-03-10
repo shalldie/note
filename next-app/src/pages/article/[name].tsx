@@ -36,7 +36,7 @@ const ArticleDetail: NextPage = props => {
     const cover = useCover();
 
     return (
-        <Layout.Column cover={cover}>
+        <Layout.Column title={detail.title} cover={cover}>
             <main className="page-article-detail">
                 {/* seo */}
                 <a href={router.asPath.replace(/=$/, '')} target="_blank" rel="noreferrer">
@@ -52,14 +52,14 @@ const ArticleDetail: NextPage = props => {
                 />
                 <div className="mt-3 mb-6">
                     <When condition={!!detail.prev}>
-                        <Link href={`/article/${detail.prev.name}`} className="link text-base">
-                            上一篇：{detail.prev.title}
+                        <Link href={`/article/${detail.prev?.name}`} className="link text-base">
+                            上一篇：{detail.prev?.title}
                         </Link>
                         <br />
                     </When>
                     <When condition={!!detail.next}>
-                        <Link href={`/article/${detail.next.name}`} className="link text-base">
-                            下一篇：{detail.next.title}
+                        <Link href={`/article/${detail.next?.name}`} className="link text-base">
+                            下一篇：{detail.next?.title}
                         </Link>
                     </When>
                 </div>
