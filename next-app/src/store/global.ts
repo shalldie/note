@@ -6,11 +6,12 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { articleActions } from './article';
 import { TRootState } from '.';
+import { getCDNImage } from '~/libs/utils';
 
 export class GlobalState {
     serverInitialized = false;
 
-    avatar = `${process.env.CDN_PREFIX}images/public/avatar_gh.png`;
+    avatar = getCDNImage('images/public/avatar_gh.png');
 
     description = [
         '会写一些 代码、心情、生活、食物、balabala 我也不知道什么类型的东西 >_<#@!',

@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { cdn } from '~/libs/cdn';
 
+import styles from './GitComment.module.scss';
+
 export interface IGitCommentProps extends IClassName {
     uuid: string;
 }
@@ -48,7 +50,7 @@ export const GitComment: React.FC<IGitCommentProps> = props => {
     }, [props.uuid]);
 
     return (
-        <div className={classNames('git-comment', props.className)}>
+        <div className={classNames('git-comment', styles.gitcomment, props.className)}>
             <div ref={root}></div>
         </div>
     );

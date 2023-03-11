@@ -40,7 +40,7 @@ export const ImgPhotoSwipe: React.FC<IImgPreviewProps> = ({ node: _, className, 
             <img
                 alt=""
                 {...props}
-                className={classNames(className, 'block rounded w-full mx-auto my-6 shadow-2xl')}
+                className={classNames(className, 'block w-full mx-auto my-6 shadow-2xl')}
                 style={{ maxWidth: '768px' }}
             />
         </a>

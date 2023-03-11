@@ -9,7 +9,7 @@ import { When } from 'react-if';
 import { cover, Layout } from '~/components/layouts';
 import { articleActions, ARTICLE_MD_CLS, useAppSelector, wrapper } from '~/store';
 import { Markdown } from '~/components/Markdown';
-import { handlePageDispatchProps } from '~/libs/utils';
+import { getCDNImage, handlePageDispatchProps } from '~/libs/utils';
 import { GitComment } from '~/components/GitComment';
 
 const useCover = () => {
@@ -46,7 +46,7 @@ const ArticleDetail: NextPage = props => {
                 <Markdown content={detail.content} className={ARTICLE_MD_CLS} />
                 {/* 上一篇、下一篇 */}
                 <img
-                    src={`${process.env.CDN_PREFIX}images/public/to_be_continued.png`}
+                    src={getCDNImage('images/public/to_be_continued.png')}
                     alt="to-be-continued"
                     className="h-36 block"
                 />

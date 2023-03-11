@@ -21,8 +21,8 @@ export const NavCover: React.FC<INavCover> = props => {
             style={props.style}
         >
             <div
-                className="py-7 px-12 rounded bg-white bg-opacity-40 sahdow-lg"
-                style={{ boxShadow: '0 0 16px hsl(0deg 0% 100% / 40%)' }}
+                className="py-7 px-12 bg-white bg-opacity-40"
+                style={{ boxShadow: '0 0 36px 16px rgba(255,255,255,0.4)' }}
                 // style={{backgroundImage: `url(${Shadow.src})`, backgroundSize: '100% 100%'}}
             >
                 {props.content?.map((line, index) => (

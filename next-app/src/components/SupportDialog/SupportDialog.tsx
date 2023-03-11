@@ -1,5 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
+import { getCDNImage } from '~/libs/utils';
 import { TransitionWrap } from '../TransitionWrap';
 
 export interface ISupportDialogProps {
@@ -9,8 +10,9 @@ export interface ISupportDialogProps {
 
 export const SupportDialog: React.FC<ISupportDialogProps> = props => {
     const qrCodes = [
-        `${process.env.CDN_PREFIX}images/public/zfb_pay.jpg`,
-        `${process.env.CDN_PREFIX}images/public/weixin_pay.jpg`
+        //
+        getCDNImage('images/public/zfb_pay.jpg'),
+        getCDNImage('images/public/weixin_pay.jpg')
     ];
 
     return createPortal(
@@ -19,7 +21,7 @@ export const SupportDialog: React.FC<ISupportDialogProps> = props => {
                 {/* mask */}
                 <div className="absolute inset-0" onClick={props.onClose}></div>
                 {/* main */}
-                <div className="relative mt-[6%] mx-auto bg-white w-[600px] rounded shadow-2xl text-center p-7">
+                <div className="relative mt-[6%] mx-auto bg-white w-[600px] shadow-2xl text-center p-7">
                     <i
                         onClick={props.onClose}
                         className="fa-solid fa-xmark absolute right-4 top-3 text-[30px] cursor-pointer duration hover:rotate-180"

@@ -1,3 +1,4 @@
+import { getCDNImage } from '~/libs/utils';
 import { LayoutColumn } from './column';
 import { LayoutDefault } from './default';
 
@@ -9,10 +10,9 @@ export const Layout = {
 export const cover = {
     main: {
         style: {
-            backgroundImage: `url(${process.env.CDN_PREFIX}images/banner/banner_sky.jpg)`,
-            // backgroundImage: 'url(/hotel.jpeg)',
+            backgroundImage: `url(${getCDNImage('images/banner/sky.jpg')})`,
             height: '700px',
-            backgroundPosition: 'center bottom'
+            backgroundPosition: 'center center'
         },
         content: [
             //
@@ -26,8 +26,7 @@ export const cover = {
     },
     section: {
         style: {
-            backgroundImage: `url(${process.env.CDN_PREFIX}images/banner/banner_zz.jpg)`,
-            // backgroundImage: 'url(/city.jpeg)',
+            backgroundImage: `url(${getCDNImage('images/banner/table.jpg')})`,
             height: '600px'
         },
         content: [
@@ -42,7 +41,7 @@ export const cover = {
     },
     detail: {
         style: {
-            backgroundImage: `url(${process.env.CDN_PREFIX}images/banner/banner_program.jpg)`,
+            backgroundImage: `url(${getCDNImage('images/banner/program.jpg')})`,
             height: '500px'
         },
         content: ['...']

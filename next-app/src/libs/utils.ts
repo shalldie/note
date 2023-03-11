@@ -42,3 +42,7 @@ export class RndColor {
         return COLORS.slice().sort(() => Math.random() - 0.5);
     }
 }
+
+export function getCDNImage(src: string) {
+    return `${process.env.CDN_PREFIX}/${src}`.replace(/\/+/g, '/');
+}
