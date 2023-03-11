@@ -5,6 +5,6 @@ interface IDynamicComponentProps extends React.PropsWithChildren {
     [key: string]: any;
 }
 
-export const DynamicComponent: React.FC<IDynamicComponentProps> = ({is, children, ...props}) => {
+export const DynamicComponent: React.FC<IDynamicComponentProps> = ({ is, children, ...props }) => {
     return React.createElement(is, props, children);
 };

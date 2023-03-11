@@ -1,31 +1,34 @@
-{
-    /* <LayoutDefault class="layout-column">
-        <div class="container row">
-            <div class="col-18 col-m-24" :class="{ 'col-offset-3': !floatbar.showMenu }" style="position: relative">
-                <nuxt />
-            </div>
-            <TransitionWrap>
-                <div v-show="floatbar.showMenu" class="col-6 col-m-hidden">
-                    <RightMenu />
-                </div>
-            </TransitionWrap>
-        </div>
-        <FloatBar />
-    </LayoutDefault> */
-}
-
 import React from 'react';
-import {Sidebar} from '../Sidebar';
-import {LayoutDefault} from './default';
+import { useRouter } from 'next/router';
 
-export const LayoutColumn: React.FC<React.PropsWithChildren> = ({children}) => {
+import classNames from 'classnames';
+
+import { Sidebar } from '../Sidebar';
+import { ILayoutDefaultProps, LayoutDefault } from './default';
+import { useAppSelector } from '~/store';
+import { TransitionWrap } from '../TransitionWrap';
+import { FloatBar } from '../FloatBar';
+
+export const LayoutColumn: React.FC<ILayoutDefaultProps> = ({ children, className, ...props }) => {
+    const sidebar = useAppSelector(n => n.global.sidebar);
+    const router = useRouter();
+
     return (
-        <LayoutDefault className="layout-column">
-            <div className="container row" style={{marginTop: '15px'}}>
-                <div className="col-18 col-m-24">{children}</div>
-                <div className="col-6 col-m-hidden">
-                    <Sidebar />
+        <LayoutDefault className={classNames('layout-column', className)} {...props}>
+            <FloatBar />
+            <div className="container mx-auto grid grid-cols-8 gap-5 my-10">
+                <div
+                    className={classNames('duration col-span-8 px-5 md:px-0 md:col-span-6', {
+                        'md:translate-x-[16.6667%]': !sidebar.show
+                    })}
+                >
+                    {children}
                 </div>
+                <TransitionWrap in={sidebar.show}>
+                    <div className="col-span-2 hidden md:block duration">
+                        <Sidebar key={router.asPath} />
+                    </div>
+                </TransitionWrap>
             </div>
         </LayoutDefault>
     );

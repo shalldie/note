@@ -1,12 +1,12 @@
 export * from './article';
 
-import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
-import {createWrapper} from 'next-redux-wrapper';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {articleSlice} from './article';
-import {globalSlice} from './global';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { createWrapper } from 'next-redux-wrapper';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { articleSlice } from './article';
+import { globalSlice } from './global';
 
-const makeStore = ({reduxWrapperMiddleware}) =>
+const makeStore = ({ reduxWrapperMiddleware }) =>
     configureStore({
         reducer: {
             [globalSlice.name]: globalSlice.reducer,
@@ -22,7 +22,7 @@ const makeStore = ({reduxWrapperMiddleware}) =>
             ].filter(Boolean) as any
     });
 
-export const wrapper = createWrapper<TAppStore>(makeStore, {debug: false});
+export const wrapper = createWrapper<TAppStore>(makeStore, { debug: false });
 
 // export type TAppDispatch = typeof store.dispatch;
 export type TAppDispatch = ReturnType<typeof makeStore>['dispatch'];

@@ -1,4 +1,4 @@
-import {NextPageContext} from 'next';
+import { NextPageContext } from 'next';
 
 export const isServer = typeof window === 'undefined';
 
@@ -10,8 +10,8 @@ export function sleep(delay = 0) {
     });
 }
 
-export function handlePageDispatchProps(payloadAction: any, ctx: NextPageContext<any>) {
-    const payload = payloadAction as {error?: {message?: string}};
+export function handlePageDispatchProps(payloadAction: any, ctx: NextPageContext) {
+    const payload = payloadAction as { error?: { message?: string } };
     // 没错误
     if (!payload.error) {
         return {};
@@ -41,4 +41,8 @@ export class RndColor {
         const COLORS = ['#4b976a', '#3597db', '#da7d99', '#67636b', '#945fad', '#e48633'];
         return COLORS.slice().sort(() => Math.random() - 0.5);
     }
+}
+
+export function getCDNImage(src: string) {
+    return `${process.env.CDN_PREFIX}/${src}`.replace(/\/+/g, '/');
 }

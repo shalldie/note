@@ -4,7 +4,7 @@
     "tabWidth": 4,
     "endOfLine": "auto",
     "printWidth": 120,
-    "bracketSpacing": false,
+    "bracketSpacing": true,
     "arrowParens": "avoid",
     "overrides": [
         {

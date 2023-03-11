@@ -1,4 +1,6 @@
-module.exports = async (_phase, {defaultConfig: _defaultConfig}) => {
+console.log(process.env.PORT);
+
+module.exports = async (_phase, { defaultConfig: _defaultConfig }) => {
     /**
      * @type {import('next').NextConfig}
      */
@@ -10,6 +12,7 @@ module.exports = async (_phase, {defaultConfig: _defaultConfig}) => {
         env: {
             CDN_PREFIX: process.env.CDN_PREFIX
         },
+        transpilePackages: ['react-syntax-highlighter'],
         sassOptions: {
             prependData: [
                 //

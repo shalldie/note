@@ -1,6 +1,5 @@
-import axios, {AxiosError} from 'axios';
-import {URL} from 'url';
-import {isServer} from './utils';
+import axios, { AxiosError } from 'axios';
+import { isServer } from './utils';
 
 const instance = axios.create({
     baseURL: isServer ? 'https://nosaid.com/api/' : '/api/'
@@ -24,13 +23,13 @@ instance.interceptors.response.use(
 
 export const http = {
     async get<T>(method: string, payload = {}) {
-        const {data} = await instance.get<T>(method, {
+        const { data } = await instance.get<T>(method, {
             params: payload
         });
         return data;
     },
     async post<T>(method: string, payload = {}) {
-        const {data} = await instance.post<T>(method, payload);
+        const { data } = await instance.post<T>(method, payload);
         return data;
     }
 };

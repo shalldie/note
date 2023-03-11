@@ -135,7 +135,7 @@ export class Enumx<T extends IEnumxItemOptions> {
  * @param {T} options
  * @returns {(Enumx<T> & {[key in keyof T]: T[key]['id']})}
  */
-export function enumxFactory<T extends IEnumxItemOptions>(options: T): Enumx<T> & {[key in keyof T]: T[key]['id']} {
+export function enumxFactory<T extends IEnumxItemOptions>(options: T): Enumx<T> & { [key in keyof T]: T[key]['id'] } {
     return new Enumx(options) as Enumx<T> & {
         [key in keyof T]: T[key]['id'];
     };

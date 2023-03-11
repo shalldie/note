@@ -1,18 +1,15 @@
-import {NextPage} from 'next';
-import {Markdown} from '~/components/Markdown';
-import {http} from '~/libs/http';
-import Head from 'next/head';
-import {Layout} from '~/components/layouts';
-import {wrapper} from '~/store';
+import { NextPage } from 'next';
 
-const PageLog: NextPage<{markdown: string}> = ({markdown, ...props}) => {
+import { http } from '~/libs/http';
+import { wrapper } from '~/store';
+import { Markdown } from '~/components/Markdown';
+import { Layout } from '~/components/layouts';
+
+const PageLog: NextPage<{ markdown: string }> = ({ markdown, ...props }) => {
     wrapper.useHydration(props);
     return (
-        <Layout.Column>
-            <Head>
-                <title>日志</title>
-            </Head>
-            <main className="page-log" style={{padding: '15px 15px 60px', color: '#444'}}>
+        <Layout.Column title="日志">
+            <main className="page-log">
                 <Markdown content={markdown} />
             </main>
         </Layout.Column>
@@ -21,7 +18,7 @@ const PageLog: NextPage<{markdown: string}> = ({markdown, ...props}) => {
 
 PageLog.getInitialProps = async ctx => {
     const markdown = await http.get<string>(`/log/${ctx.query.name}`);
-    return {markdown};
+    return { markdown };
 };
 
 export default PageLog;

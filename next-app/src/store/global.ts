@@ -2,14 +2,16 @@
  * 全局相关
  */
 
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {articleActions} from './article';
-import {TRootState} from '.';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { articleActions } from './article';
+import { TRootState } from '.';
+import { getCDNImage } from '~/libs/utils';
 
 export class GlobalState {
     serverInitialized = false;
 
-    avatar = `${process.env.CDN_PREFIX}images/public/avatar_gh.png`;
+    avatar = getCDNImage('images/public/avatar_gh.png');
 
     description = [
         '会写一些 代码、心情、生活、食物、balabala 我也不知道什么类型的东西 >_<#@!',
@@ -72,6 +74,7 @@ export class GlobalState {
     };
 
     sidebar = {
+        show: true,
         /**
          * 是否显示目录
          */
@@ -80,30 +83,24 @@ export class GlobalState {
          * 目录索引列表
          * @type { Array<{text:string;id:string;level:number}> }
          */
-        indexList: [],
-        labels: {
-            title: '标签',
-            list: [{name: 'loading...'}] as {name: string; count: number}[]
-        },
-        friendLinks: {
-            title: '友情链接',
-            list: [
-                {
-                    text: 'linkFly - tasaid 听说',
-                    link: 'https://tasaid.com/'
-                },
-                {
-                    text: '剧中人 - bh-lay',
-                    link: 'http://bh-lay.com/'
-                }
-            ]
-        }
+        indexList: []
     };
+
+    friendLinks = [
+        {
+            title: 'linkFly - tasaid 听说',
+            link: 'https://tasaid.com/'
+        },
+        {
+            title: '剧中人 - bh-lay',
+            link: 'http://bh-lay.com/'
+        }
+    ];
 }
 
 export const globalSlice = createSlice({
     name: 'global',
-    initialState: () => ({...new GlobalState()}),
+    initialState: () => ({ ...new GlobalState() }),
     reducers: {
         assignState(state, action: PayloadAction<Partial<GlobalState>>) {
             Object.assign(state, action.payload);
@@ -118,8 +115,14 @@ export const globalActions = {
         if (initialized) {
             return;
         }
-        thunk.dispatch(globalActions.assignState({serverInitialized: true}));
+        thunk.dispatch(globalActions.assignState({ serverInitialized: true }));
 
-        await thunk.dispatch(articleActions.fetchList());
+        await Promise.all([
+            //
+            thunk.dispatch(articleActions.fetchArticleList({})),
+            thunk.dispatch(articleActions.fetchLabels()),
+            thunk.dispatch(articleActions.fetchRencentList()),
+            thunk.dispatch(articleActions.fetchRecommendList())
+        ]);
     })
 };

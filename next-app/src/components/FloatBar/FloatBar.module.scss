@@ -1,0 +1,87 @@
+.floatbar {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 46px;
+    height: 46px;
+    z-index: 1;
+    font-size: 16px;
+
+    :global {
+        .bar {
+            transition: var(--transition);
+            box-shadow: 0 2px 4px 1px rgb(0 0 0 / 20%);
+            @include flex;
+            justify-content: center;
+
+            &.ctl-pie {
+                position: relative;
+                width: inherit;
+                height: inherit;
+                cursor: pointer;
+                border-radius: 50%;
+                background: var(--color-blue);
+                z-index: 1;
+                // text-align: center;
+                font-size: 24px;
+                // line-height: 46px;
+                color: #fff;
+                i {
+                    transition: var(--transition);
+                    transform-origin: center;
+                    transform: rotate(270deg);
+                }
+            }
+
+            &.bar-item {
+                position: absolute;
+                cursor: pointer;
+                bottom: 0;
+                right: 0;
+                height: 36px;
+                width: 36px;
+                z-index: 0;
+                opacity: 1;
+                border-radius: var(--border-radius);
+                box-shadow: 0 2px 4px 1px rgb(0 0 0 / 20%);
+                color: var(--color);
+                background-color: #fff;
+                text-decoration: none;
+
+                &.up {
+                    transform: translate3d(0, -200%, 0);
+                }
+
+                &.coffee {
+                    transform: translate3d(-140%, -140%, 0);
+                }
+
+                &.github {
+                    transform: translate3d(-200%, 0, 0);
+                }
+
+                &.menu {
+                    transform: translate3d(-350%, 0, 0);
+                }
+
+                &:hover {
+                    background: var(--color-blue);
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    &:not(.open) {
+        :global {
+            .ctl-pie i {
+                transform: rotate(0deg);
+            }
+
+            .bar-item {
+                opacity: 0 !important;
+                transform: translate3d(0, 0, 0) !important;
+            }
+        }
+    }
+}

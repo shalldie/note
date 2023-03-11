@@ -11,8 +11,11 @@ import {
     ActionImpl
 } from 'kbar';
 
-import {useNavActions, useSearchActions} from './actions';
-import {KSearch} from './KSearch';
+import { useNavActions, useSearchActions } from './actions';
+import { KSearch } from './KSearch';
+
+// const BG_COLOR = 'var(--color-gray)';
+const BG_COLOR = '#fff';
 
 const searchStyle = {
     padding: '12px 16px',
@@ -21,14 +24,14 @@ const searchStyle = {
     boxSizing: 'border-box' as React.CSSProperties['boxSizing'],
     outline: 'none',
     border: 'none',
-    background: '#fff',
+    background: BG_COLOR,
     color: 'var(--color)'
 };
 
 const animatorStyle = {
     maxWidth: '600px',
     width: '100%',
-    background: '#fff',
+    background: BG_COLOR,
     color: 'var(--color)',
     borderRadius: '8px',
     overflow: 'hidden',
@@ -42,7 +45,7 @@ const groupNameStyle = {
     opacity: 0.5
 };
 
-export const KProvider: React.FC<React.PropsWithChildren> = ({children}) => {
+export const KProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const actions = useNavActions();
     // const {actions} = useActions();
 
@@ -62,8 +65,8 @@ export const KProvider: React.FC<React.PropsWithChildren> = ({children}) => {
 function CommandBar() {
     useSearchActions();
     return (
-        <KBarPortal>
-            <KBarPositioner>
+        <KBarPortal data-xxx>
+            <KBarPositioner style={{ backdropFilter: 'blur(5px)' }}>
                 <KBarAnimator style={animatorStyle}>
                     <KSearch defaultPlaceholder="导航或搜索..." style={searchStyle} />
                     {/* <KBarSearch defaultPlaceholder="导航或搜索..." style={searchStyle} /> */}
@@ -75,12 +78,12 @@ function CommandBar() {
 }
 
 function RenderResults() {
-    const {results, rootActionId} = useMatches();
+    const { results, rootActionId } = useMatches();
 
     return (
         <KBarResults
             items={results}
-            onRender={({item, active}) =>
+            onRender={({ item, active }) =>
                 typeof item === 'string' ? (
                     <div style={groupNameStyle}>{item}</div>
                 ) : (
@@ -136,7 +139,7 @@ const ResultItem = React.forwardRef(
                     }}
                 >
                     {action.icon && action.icon}
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <div>
                             {ancestors.length > 0 &&
                                 ancestors.map(ancestor => (
@@ -160,11 +163,11 @@ const ResultItem = React.forwardRef(
                                 ))}
                             <span>{action.name}</span>
                         </div>
-                        {action.subtitle && <span style={{fontSize: 12}}>{action.subtitle}</span>}
+                        {action.subtitle && <span style={{ fontSize: 12 }}>{action.subtitle}</span>}
                     </div>
                 </div>
                 {action.shortcut?.length ? (
-                    <div aria-hidden style={{display: 'grid', gridAutoFlow: 'column', gap: '4px'}}>
+                    <div aria-hidden style={{ display: 'grid', gridAutoFlow: 'column', gap: '4px' }}>
                         {action.shortcut.map(sc => (
                             <kbd
                                 key={sc}

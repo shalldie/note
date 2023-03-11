@@ -1,10 +1,12 @@
-import {Action, createAction, useRegisterActions} from 'kbar';
-import {useRouter} from 'next/router';
-import React, {useMemo} from 'react';
-import {useAppSelector} from '~/store';
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 
-export const ActionIcon: React.FC<{className?: string}> = props => {
-    return <i className={props.className} style={{width: '20px'}}></i>;
+import { Action, createAction, useRegisterActions } from 'kbar';
+
+import { useAppSelector } from '~/store';
+
+export const ActionIcon: React.FC<{ className?: string }> = props => {
+    return <i className={props.className} style={{ width: '20px' }}></i>;
 };
 
 export const useNavActions = () => {
@@ -57,7 +59,7 @@ export const useNavActions = () => {
 
 export const useSearchActions = () => {
     const router = useRouter();
-    const list = useAppSelector(n => n.article.list);
+    const list = useAppSelector(n => n.article.articleList);
     // const {queryValue} = useKBar(state => ({queryValue: state.searchQuery}));
 
     const rootSearchID = 'search-articles';
@@ -76,7 +78,7 @@ export const useSearchActions = () => {
             createAction({
                 parent: rootSearchID,
                 name: article.title,
-                keywords: article.labels.concat([article.name]).join(' '),
+                keywords: [...article.labels, article.name, article.title.replace(/\s*/g, ' ')].join(' '),
                 perform() {
                     router.push(`/article/${article.name}`);
                 }
@@ -84,13 +86,7 @@ export const useSearchActions = () => {
         );
     }, [list, router]);
 
-    const testAction = createAction({
-        parent: searchActions[0]?.id,
-        name: 'some test',
-        keywords: 'some test'
-    });
-
-    const resultActions = [rootSearchAction, ...searchActions, testAction].filter(Boolean) as Action[];
+    const resultActions = [rootSearchAction, ...searchActions].filter(Boolean) as Action[];
 
     useRegisterActions(resultActions, [resultActions]);
 };
