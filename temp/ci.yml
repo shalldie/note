@@ -1,0 +1,109 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ci
+
+# Controls when the action will run.
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # 准备node环境
+      - name: Use Node.js 18 🐼
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # checkout blog
+      - name: Checkout blog 🦋
+        uses: actions/checkout@v3
+        with:
+          path: blog
+
+      # checkout static
+      - name: Checkout static 🦋
+        uses: actions/checkout@v3
+        with:
+          repository: shalldie/static
+          path: static
+
+      # pnpm 设置、缓存
+      - name: Install pnpm 📂
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.27.0
+
+      - name: Get pnpm store directory 📂
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - name: Setup pnpm cache 📂
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # blog 进行打包、清理
+      - name: Build blog 🚀
+        run: |
+          # blog 构建
+          cd $GITHUB_WORKSPACE/blog
+
+          rm -rf .git
+
+          pnpm i
+
+          npm run build
+
+          # 没这一步不干净
+          npm run clean
+
+          pnpm i -P
+
+          rm -rf packages/client/src
+          rm -rf packages/client/tsconfig.json
+          rm -rf packages/server/src
+
+          cd $GITHUB_WORKSPACE/static
+
+          rm -rf .git
+
+          find . \
+          | grep -E "\.(jpg|png|jpeg|gif)$" \
+          | xargs -i rm -rf {}
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx 🐳
+        uses: docker/setup-buildx-action@v2
+
+      # 登陆 Docker Hub
+      - name: Login Docker Hub 🐳🐳
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_NAME }}
+          password: ${{ secrets.DOCKER_PSW }}
+
+      # 打包并推送 docker 镜像
+      - name: Build & Push Docker Image 🐳🐳🐳
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: blog/docker/Dockerfile
+          push: true
+          tags: shalldie/blog:latest
