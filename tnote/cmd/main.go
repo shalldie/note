@@ -3,10 +3,17 @@ package main
 import (
 	"fmt"
 	"os"
-	"tnote/gist"
+
+	"github.com/shalldie/tnote/gist"
+	"github.com/shalldie/tnote/note"
+)
+
+var (
+	FetchOptions gist.FetchOptions
 )
 
 func main() {
+
 	token := os.Getenv("TNOTE_GIST_TOKEN")
 
 	if token == "" {
@@ -14,6 +21,5 @@ func main() {
 		os.Exit(1)
 	}
 
-	gh := gist.NewGist(token)
-	gh.Setup()
+	note.NewTNote(token).Setup()
 }

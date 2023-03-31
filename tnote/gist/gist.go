@@ -7,13 +7,14 @@ import (
 	"io"
 	"net/http"
 	"strconv"
-	"tnote/utils"
+
+	"github.com/shalldie/tnote/utils"
 )
 
 type Gist struct {
-	TOKEN  string
-	GistID string
-	Model  *GistModel
+	TOKEN   string
+	Model   *GistModel
+	Content string
 }
 
 func NewGist(token string) *Gist {
@@ -97,7 +98,9 @@ func (g *Gist) FetchGists(page int, perPage int) []*GistModel {
 }
 
 // 获取文件内容
-func (g *Gist) FetchFile(fileUrl string) string {
+func (g *Gist) FetchFile(fileName string) string {
+	fileUrl := g.Model.Files[fileName].RawUrl
+
 	body := fetch(fileUrl, &FetchOptions{
 		Method:  "GET",
 		Headers: g.getHeaders(),
