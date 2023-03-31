@@ -1,12 +1,19 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"tnote/gist"
 )
 
-const TOKEN = "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"
-
 func main() {
-	gh := gist.NewGist(TOKEN)
+	token := os.Getenv("TNOTE_GIST_TOKEN")
+
+	if token == "" {
+		fmt.Println("Can't find $TNOTE_GIST_TOKEN in $PATH")
+		os.Exit(1)
+	}
+
+	gh := gist.NewGist(token)
 	gh.Setup()
 }
