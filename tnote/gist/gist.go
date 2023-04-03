@@ -6,15 +6,18 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sort"
 	"strconv"
 
+	"github.com/shalldie/gog/gs"
 	"github.com/shalldie/tnote/utils"
 )
 
 type Gist struct {
-	TOKEN   string
-	Model   *GistModel
-	Content string
+	TOKEN        string
+	Model        *GistModel
+	CurrentIndex int
+	Files        []*FileModel
 }
 
 func NewGist(token string) *Gist {
@@ -41,11 +44,13 @@ func (g *Gist) Setup() {
 
 	// 3. 如果没找到，去创建 gist
 	if err != nil {
-		g.Model = g.createGist()
+		g.Model = g.CreateGist("newfile.md", "welcome to use tnote >_<#@!")
 	} else {
 		g.Model = item
 	}
-	// fmt.Println(g.Model)
+
+	// 4. 有 gist id 后，update 获取所有内容
+	g.Update()
 }
 
 func (g *Gist) getHeaders() map[string]string {
@@ -109,15 +114,15 @@ func (g *Gist) FetchFile(fileName string) string {
 	return string(body)
 }
 
-func (g *Gist) createGist() *GistModel {
+func (g *Gist) CreateGist(fileName string, content string) *GistModel {
 	body := fetch("https://api.github.com/gists", &FetchOptions{
 		Method: "POST",
 		Params: utils.H{
 			"title":       SPECIAL_DESCRIPTION,
 			"description": SPECIAL_DESCRIPTION,
 			"files": utils.H{
-				"newfile.md": utils.H{
-					"content": "welcome to use tnote >_<#@!",
+				fileName: utils.H{
+					"content": content,
 				},
 			},
 			"public": false,
@@ -136,18 +141,81 @@ func (g *Gist) createGist() *GistModel {
 	return model
 }
 
-// func (g *Gist) getGist(id string) *GistModel {
-// 	body := fetch("https://api.github.com/gists/"+id, &FetchOptions{
-// 		Method:  "GET",
-// 		Headers: g.getHeaders(),
-// 	})
+func (g *Gist) UpdateFile(fileName string, content any) {
 
-// 	var model *GistModel
-// 	err := json.Unmarshal(body, model)
+	// nil 是删除
+	filePayload := content
+	if filePayload != nil {
+		filePayload = utils.H{
+			"content": filePayload,
+		}
+	}
 
-// 	if err != nil {
-// 		panic(err)
-// 	}
+	body := fetch("https://api.github.com/gists/"+g.Model.Id, &FetchOptions{
+		Method:  "PATCH",
+		Headers: g.getHeaders(),
+		Params: utils.H{
+			"files": utils.H{
+				fileName: filePayload,
+			},
+		},
+	})
 
-// 	return model
-// }
+	// result := string(body)
+	// fmt.Println(result)
+
+	model := &GistModel{}
+	err := json.Unmarshal(body, model)
+
+	if err != nil {
+		panic(err)
+	}
+
+	// 如果有文件，表示返回内容正常
+	// 进行更新
+	if len(model.Files) > 0 {
+		g.Model = model
+		g.updateFiles()
+		return
+	}
+
+	// 无文件，返回内容异常
+	// 全量更新
+	g.Update()
+}
+
+func (g *Gist) Update() {
+	body := fetch("https://api.github.com/gists/"+g.Model.Id, &FetchOptions{
+		Method:  "GET",
+		Headers: g.getHeaders(),
+	})
+
+	model := &GistModel{}
+	err := json.Unmarshal(body, model)
+
+	if err != nil {
+		panic(err)
+	}
+
+	g.Model = model
+	g.updateFiles()
+}
+
+func (g *Gist) updateFiles() {
+	files := make([]*FileModel, 0)
+	for fileName := range g.Model.Files {
+		files = append(files, g.Model.Files[fileName])
+	}
+	fileNames := gs.Map(files, func(f *FileModel, _ int) string {
+		return f.FileName
+	})
+	sort.Strings(fileNames)
+	files = gs.Sort(files, func(f1 *FileModel, f2 *FileModel) bool {
+		return gs.IndexOf(fileNames, f1.FileName) < gs.IndexOf(fileNames, f2.FileName)
+	})
+	g.Files = files
+}
+
+func (g *Gist) GetContent() string {
+	return g.Files[g.CurrentIndex].Content
+}

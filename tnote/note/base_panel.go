@@ -9,6 +9,7 @@ import (
 
 type IPanel interface {
 	SetFocus()
+	HandleShortcuts(event *tcell.EventKey) *tcell.EventKey
 }
 
 type BasePanel struct {

@@ -1,6 +1,8 @@
 package note
 
 import (
+	"unicode"
+
 	"github.com/gdamore/tcell/v2"
 	"github.com/pgavlin/femto"
 	"github.com/pgavlin/femto/runtime"
@@ -9,8 +11,6 @@ import (
 type ViewPanel struct {
 	*BasePanel
 	Editor *femto.View
-	// impl
-	OnSave func(text string) // 保存
 }
 
 func NewViewPanel() *ViewPanel {
@@ -18,7 +18,7 @@ func NewViewPanel() *ViewPanel {
 		BasePanel: NewBasePanel(),
 	}
 
-	p.SetTitle("内容").SetBorderPadding(0, 0, 1, 1)
+	p.SetTitle("详情").SetBorderPadding(0, 0, 1, 1)
 
 	p.prepareEditor()
 	p.AddItem(p.Editor, 0, 1, false)
@@ -58,9 +58,10 @@ func (p *ViewPanel) prepareEditor() {
 		switch event.Key() {
 		case tcell.KeyEsc:
 			p.DeactivateEditor()
-			if p.OnSave != nil {
-				p.OnSave(p.Editor.Buf.String())
-			}
+			p.SaveContent(p.Editor.Buf.String())
+			// if p.OnSave != nil {
+			// 	p.OnSave(p.Editor.Buf.String())
+			// }
 			p.SetFocus()
 			return nil
 		}
@@ -74,6 +75,12 @@ func (p *ViewPanel) SetContent(content string) {
 	p.Editor.SetColorscheme(colorScheme) // 不重新设置会丢失主题样式
 }
 
+func (p *ViewPanel) SaveContent(content string) {
+	file := g.Files[g.CurrentIndex]
+	// file.Content = content
+	go g.UpdateFile(file.FileName, content)
+}
+
 func (p *ViewPanel) LoadFile(fileName string) {
 	p.DeactivateEditor()
 	go func() {
@@ -81,6 +88,23 @@ func (p *ViewPanel) LoadFile(fileName string) {
 		p.SetContent(content)
 		app.Draw()
 	}()
+}
+
+// 处理快捷键
+func (p *ViewPanel) HandleShortcuts(event *tcell.EventKey) *tcell.EventKey {
+
+	switch unicode.ToLower(event.Rune()) {
+	case 'e':
+		p.ActivateEditor()
+		return nil
+	}
+
+	if event.Key() == tcell.KeyLeft {
+		sidebar.SetFocus()
+		return nil
+	}
+
+	return event
 }
 
 func makeBufferFromString(content string) *femto.Buffer {

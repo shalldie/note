@@ -51,21 +51,21 @@ func ignoreKeyEvt() bool {
 	return gs.Contains(textInputs, reflect.TypeOf(app.GetFocus()).String())
 }
 
-// func makeConfirm(content string, done func()) {
-// 	lastFocus := app.GetFocus()
-// 	modal.SetText(content).
-// 		SetDoneFunc(func(buttonIndex int, buttonLabel string) {
-// 			pages.HidePage("modal")
-// 			pages.HidePage("main")
+func makeConfirm(content string, done func()) {
+	lastFocus := note.App.GetFocus()
+	note.Modal.SetText(content).
+		SetDoneFunc(func(buttonIndex int, buttonLabel string) {
+			note.Pages.HidePage("modal")
+			note.Pages.HidePage("main")
 
-// 			go app.QueueUpdateDraw(func() {
-// 				pages.SwitchToPage("main")
-// 				app.SetFocus(lastFocus)
-// 				if buttonIndex == 0 {
-// 					done()
-// 				}
-// 			})
-// 		})
+			go app.QueueUpdateDraw(func() {
+				note.Pages.SwitchToPage("main")
+				app.SetFocus(lastFocus)
+				if buttonIndex == 0 {
+					done()
+				}
+			})
+		})
 
-// 	pages.ShowPage("modal")
-// }
+	note.Pages.ShowPage("modal")
+}

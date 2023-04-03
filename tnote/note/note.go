@@ -3,12 +3,14 @@ package note
 import (
 	"fmt"
 
+	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 	"github.com/shalldie/tnote/gist"
 )
 
 // 放全局，方便引用，，，反正是单例
 var (
+	note    *TNote
 	app     *tview.Application
 	g       *gist.Gist
 	sidebar *SidebarPanel
@@ -27,7 +29,7 @@ type TNote struct {
 }
 
 func NewTNote(token string) *TNote {
-	note := &TNote{
+	note = &TNote{
 		Gist: gist.NewGist(token),
 	}
 	g = note.Gist
@@ -39,9 +41,9 @@ func (t *TNote) Setup() {
 	fmt.Println("loading...")
 
 	t.initLayout()
+	t.setKeyboardShortcuts()
 
-	// t.Gist.Setup()
-	t.Sidebar.LoadFiles()
+	t.Sidebar.Setup()
 
 	if err := t.App.SetRoot(t.Pages, true).SetFocus(t.Sidebar).Run(); err != nil {
 		panic(err)
@@ -86,4 +88,42 @@ func (t *TNote) initLayout() {
 				AddItem(t.StatusBar, 0, 1, false).
 				AddItem(splitItem, 2, 1, false),
 			1, 1, false)
+}
+
+func (t *TNote) setKeyboardShortcuts() *tview.Application {
+	return app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+		if ignoreKeyEvt() {
+			return event
+		}
+
+		// Global shortcuts
+		// switch unicode.ToLower(event.Rune()) {
+		// case '1':
+		// 	app.SetFocus(projectPanel)
+		// 	return nil
+		// case '2':
+		// 	app.SetFocus(taskPanel)
+		// 	return nil
+
+		// case '3':
+		// 	app.SetFocus(detailPanel)
+		// 	return nil
+		// }
+
+		// Handle based on current focus. Handlers may modify event
+		switch {
+		case t.Sidebar.HasFocus():
+			event = t.Sidebar.HandleShortcuts(event)
+		case t.View.HasFocus():
+			event = t.View.HandleShortcuts(event)
+			// 	if event != nil && projectDetailPane.isShowing() {
+			// 		event = projectDetailPane.handleShortcuts(event)
+			// 	}
+			// case taskDetailPane.HasFocus():
+			// 	event = taskDetailPane.handleShortcuts(event)
+
+		}
+
+		return event
+	})
 }
