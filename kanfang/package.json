@@ -1,0 +1,17 @@
+{
+  "name": "kanfang",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "packageManager": "pnpm@10.18.2",
+  "devDependencies": {
+    "vitepress": "2.0.0-alpha.12"
+  }
+}
