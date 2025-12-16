@@ -1,0 +1,60 @@
+# Default values for code-server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: codercom/code-server
+  tag: "4.104.2"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+# The existing secret to use for code-server authentication in the frontend. the password is stored in the secret under the key `password`
+password: password # 修改为你的密码
+
+ingress:
+  enabled: false
+  # 这里的就是不行，，，烦死了
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1
+  # hosts:
+  #   - paths:
+  #       - /code/?(.*)
+
+##
+## Init containers parameters:
+## volumePermissions: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
+##
+volumePermissions:
+  enabled: true
+  securityContext:
+    runAsUser: 0
+
+## Pod Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+##
+securityContext:
+  enabled: true
+  fsGroup: 0
+  runAsUser: 0
+
+## Persist data to a persistent volume
+persistence:
+  enabled: true
+  ## code-server data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 10Gi
+  annotations: {}
+  # existingClaim: ""
+  hostPath: /root/projects/code-server/volume
